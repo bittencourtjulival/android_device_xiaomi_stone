@@ -207,6 +207,7 @@ PRODUCT_PACKAGES += \
 # Input
 PRODUCT_PACKAGES += \
     gpio-keys.kl \
+    holi-qrdsku1-snd-card_Button_Jack.kl \
     uinput-fpc.idc \
     uinput-fpc.kl \
     uinput-goodix.idc \
