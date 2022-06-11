@@ -207,3 +207,6 @@ persist.audio.button_jack.switch=0
 
 # support fuse passthrough
 persist.sys.fuse.passthrough.enable=true
+
+# Render
+debug.cpurend.vsync=false
