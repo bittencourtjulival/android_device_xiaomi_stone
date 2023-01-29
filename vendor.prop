@@ -1,4 +1,3 @@
-
 # Audio
 persist.vendor.audio.ambisonic.auto.profile=false
 persist.vendor.audio.ambisonic.capture=false
@@ -201,6 +200,7 @@ persist.vendor.fingerprint.sensor_modules=fpc,goodix
 # Graphics
 debug.sf.disable_client_composition_cache=1
 debug.sf.enable_advanced_sf_phase_offset=1
+debug.sf.disable_backpressure=1
 debug.sf.enable_gl_backpressure=0
 debug.sf.enable_adpf_cpu_hint=true
 debug.sf.frame_rate_multiple_threshold=60
