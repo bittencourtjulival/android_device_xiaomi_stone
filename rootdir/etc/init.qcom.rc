@@ -708,3 +708,14 @@ on property:sys.tp.grip_enable=90
 on property:sys.tp.grip_enable=270
     write /sys/devices/platform/soc/4c88000.i2c/i2c-2/2-0038/fts_edge_mode 2
 #M17-T code for HQ-257580 add by baiyixin at 2022/10/26 end
+
+# hwcomposer
+service vendor.qti.hardware.display.composer /vendor/bin/hw/vendor.qti.hardware.display.composer-service
+    override
+    class hal animation
+    user system
+    group graphics drmrpc
+    capabilities SYS_NICE
+    onrestart restart surfaceflinger
+    socket pps stream 0660 system system
+    writepid /dev/cpuset/foreground/tasks
