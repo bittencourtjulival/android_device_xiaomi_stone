@@ -92,8 +92,9 @@ on fs
     chmod 0771 /mnt/rescue
     
 on post-fs
-    # set RLIMIT_MEMLOCK to 64MB
-    setrlimit 8 67108864 67108864
+
+    # Set RLIMIT_MEMLOCK to 64KB
+    setrlimit 8 65536 65536
 
 on late-fs
     wait_for_prop hwservicemanager.ready true
