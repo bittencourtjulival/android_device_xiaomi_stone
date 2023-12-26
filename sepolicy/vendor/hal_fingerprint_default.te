@@ -30,3 +30,6 @@ allow hal_fingerprint_default uhid_device:chr_file rw_file_perms;
 allow hal_fingerprint_default vendor_fingerprint_device:chr_file rw_file_perms;
 allow hal_fingerprint_default input_device:dir r_dir_perms;
 allow hal_fingerprint_default input_device:chr_file rw_file_perms;
+
+allow hal_fingerprint_default system_prop:property_service { set };
+allow hal_fingerprint_default exported_system_prop:property_service { set };

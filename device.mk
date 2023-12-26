@@ -214,6 +214,10 @@ PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
     android.hardware.ir@1.0-service
 
+# Device-specific settings
+  PRODUCT_PACKAGES += \
+      XiaomiParts
+
 # Kernel
 PRODUCT_ENABLE_UFFD_GC := false
 

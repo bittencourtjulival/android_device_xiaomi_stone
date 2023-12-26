@@ -4,3 +4,6 @@ allow hal_sensors_default hal_audio_default:unix_stream_socket connectto;
 
 hal_client_domain(hal_sensors_default, hal_audio)
 allow hal_sensors_default hal_audio_hwservice:hwservice_manager find;
+
+allow hal_fingerprint_default system_prop:property_service { set };
+allow hal_fingerprint_default exported_system_prop:property_service { set };
