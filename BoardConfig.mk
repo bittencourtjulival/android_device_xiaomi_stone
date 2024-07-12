@@ -1,4 +1,3 @@
-
 #
 # Copyright (C) 2023-2024 The LineageOS Project
 #
@@ -55,6 +54,11 @@ TARGET_SCREEN_DENSITY := 440
 
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
+
+# Global LTO
+TARGET_GLOBAL_LTO := thin
+TARGET_GLOBAL_OPTIMIZATION := O3
+TARGET_GLOBAL_THINLTO := true
 
 # GNSS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := default
