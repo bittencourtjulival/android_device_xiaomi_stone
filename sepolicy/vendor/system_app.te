@@ -2,4 +2,9 @@ allow system_app sysfs:file { setattr getattr write open read };
 allow system_app vendor_sysfs_graphics:dir { search setattr getattr write open read };
 allow system_app privapp_data_file:dir { search };
 
-
+# HBM
+type sysfs_dsi_display_primary;
+allow system_app vendor_sysfs_graphics:file { read write open setattr getattr };
+allow system_app vendor_sysfs_graphics:dir { search open read };
+allow system_app sysfs_dsi_display_primary:dir search;
+allow system_app sysfs_dsi_display_primary:file write;
