@@ -369,6 +369,10 @@ PRODUCT_PACKAGES += \
     libqti_vndfwk_detect.vendor \
     libvndfwk_detect_jni.qti.vendor
 
+# Recovery
+PRODUCT_PACKAGES += \
+    init_xiaomi_stone.recovery
+
 # RIL
 PRODUCT_PACKAGES += \
     librmnetctl
