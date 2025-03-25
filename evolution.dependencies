@@ -1,0 +1,18 @@
+[
+  {
+    "repository": "bittencourtjulival/android_hardware_xiaomi",
+    "target_path": "hardware/xiaomi",
+    "branch": "15.0"
+  },
+  {
+    "repository": "bittencourtjulival/proprietary_vendor_xiaomi-stone",
+    "target_path": "vendor/xiaomi/stone"
+	"branch": "evox"
+  },
+  {
+    "repository": "bittencourtjulival/android_kernel_xiaomi_stone",
+    "target_path": "device/xiaomi/stone-kernel"
+	"branch": "15.0"
+  }
+]
+
