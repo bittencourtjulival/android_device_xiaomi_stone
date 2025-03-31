@@ -501,5 +501,8 @@ PRODUCT_PACKAGES += \
     libpng.vendor \
     libwfdaac_vendor
 
+# Disable Matlog
+TARGET_DISABLE_MATLOG := true
+
 # Inherit from proprietary targets
 $(call inherit-product, vendor/xiaomi/stone/stone-vendor.mk)
