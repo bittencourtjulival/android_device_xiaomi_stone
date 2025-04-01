@@ -1,6 +1,8 @@
 # IMEI
 vendor_internal_prop(vendor_deviceid_prop);
 
+# Power HAL
+vendor_public_prop(vendor_power_prop);
+
 # ZRAM
 vendor_internal_prop(vendor_zram_prop);
-

@@ -221,12 +221,6 @@ on post-fs-data
     # Create directory used by display clients
     mkdir /data/vendor/display 0770 system graphics
 
-    # Change lm related dirs
-    mkdir /data/vendor/lm 0700 root root
-
-    # Create directory used by powermodule
-    mkdir /data/vendor/pwr 0700 root root
-
     # Create directory used by media clients
     mkdir /data/vendor/media 0770 mediacodec media
 
@@ -347,15 +341,7 @@ on post-fs-data
     mkdir /data/vendor/fm 0770 system system
     chmod 0770 /data/vendor/fm
 
-    #Create PERFD deamon related dirs
-    mkdir /data/vendor/perfd 0770 root system
-    chmod 2770 /data/vendor/perfd
-    rm /data/vendor/perfd/default_values
-
     mkdir /data/vendor/secure_element 0777 system system
-
-    #Create IOP  deamon related dirs
-    mkdir /data/vendor/iop 0700 root system
 
     # Mark the copy complete flag to not completed
     write /data/vendor/radio/copy_complete 0
@@ -398,13 +384,6 @@ service nqnfcinfo /system/vendor/bin/nqnfcinfo
     user system
     oneshot
 
-service iop /system/vendor/bin/iop
-    class main
-    user root
-    group root
-    disabled
-    socket iop seqpacket 0666 root system
-
 service vendor.ssr_setup /system/vendor/bin/ssr_setup
     oneshot
     disabled
@@ -443,6 +422,23 @@ on property:sys.boot_completed=1
     chown media audio /sys/kernel/wcd_cpe0/fw_name
     #Reinit lmkd to reconfigure lmkd properties
     setprop lmkd.reinit 1
+
+    chown system system /proc/sys/kernel/sched_prefer_spread
+    chown system system /proc/sys/kernel/sched_busy_hyst_ns
+    chown system system /proc/sys/kernel/sched_busy_hysteresis_enable_cpus
+    chown system system /proc/sys/kernel/sched_min_task_util_for_boost
+    chown system system /proc/sys/kernel/sched_min_task_util_for_colocation
+    chown system system /dev/cpuctl/foreground/cpu.uclamp.min
+    chown system system /dev/cpuctl/top-app/cpu.uclamp.min
+    chown system system /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
+    chmod 0664 /proc/sys/kernel/sched_prefer_spread
+    chmod 0664 /proc/sys/kernel/sched_busy_hyst_ns
+    chmod 0664 /proc/sys/kernel/sched_busy_hysteresis_enable_cpus
+    chmod 0664 /proc/sys/kernel/sched_min_task_util_for_boost
+    chmod 0664 /proc/sys/kernel/sched_min_task_util_for_colocation
+    chmod 0664 /dev/cpuctl/foreground/cpu.uclamp.min
+    chmod 0664 /dev/cpuctl/top-app/cpu.uclamp.min
+    chmod 0664 /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
 
 # corefile limit
 on property:persist.debug.trace=1
