@@ -177,9 +177,6 @@ persist.vendor.fingerprint.type=side
 persist.vendor.fingerprint.sensor_location=1080|960|200|local:4630947218746568833
 persist.vendor.fingerprint.sensor_modules=fpc,goodix
 
-# FRP
-ro.frp.pst=/dev/block/bootdevice/by-name/frp
-
 # Graphics
 debug.sf.disable_client_composition_cache=1
 debug.sf.enable_advanced_sf_phase_offset=1
