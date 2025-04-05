@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/fastcharge_category_title">
+        <SwitchPreference
+            android:key="fastcharge_normal"
+            android:title="@string/fastcharge_normal_title"
+            android:summary="@string/fastcharge_normal_summary"
+            android:persistent="true" />
+            
+        <SwitchPreference
+            android:key="fastcharge_usb"
+            android:title="@string/fastcharge_usb_title"
+            android:summary="@string/fastcharge_usb_summary"
+            android:persistent="true" />
+    </PreferenceCategory>
+</PreferenceScreen>

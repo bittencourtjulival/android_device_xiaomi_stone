@@ -23,7 +23,7 @@
 
    <!-- Dirac settings -->
     <string name="dirac_enable">Enable dirac</string>
-    <string name="dirac_title">Diracâ„¢ Sound</string>
+    <string name="dirac_title">Dirac™ Sound</string>
     <string name="dirac_summary">Optimize audio quality</string>
     <string name="dirac_headset_title">Choose headphones type</string>
     <string name="dirac_preset_title">Choose a preset</string>
@@ -131,4 +131,16 @@
     <string name="dc_dimming_enable_title">DC Dimming</string>
     <string name="dc_dimming_enable_summary">Reduces eye strain in low light conditions</string>
     <string name="dc_dimming_enable_summary_not_supported">DC Dimming is currently not supported by the kernel</string>
+
+    <!-- Fastcharge settings -->
+    <string name="fastcharge_title">Fastcharging</string>
+    <string name="fastcharge_summary">Configure fastcharge options</string>
+    <string name="fastcharge_category_title">Fastcharge options</string>
+    <string name="fastcharge_normal_title">Enable for normal chargers</string>
+    <string name="fastcharge_normal_summary">Enable fastcharging when using wall chargers</string>
+    <string name="fastcharge_usb_title">Enable for USB</string>
+    <string name="fastcharge_usb_summary">Enable fastcharging when using USB ports</string>
+    <string name="fastcharge_normal_unavailable">Fast charging not supported on this device</string>
+    <string name="fastcharge_usb_unavailable">USB fast charging not supported on this device</string>
+    
 </resources>
