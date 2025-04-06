@@ -62,3 +62,6 @@
 # Fastcharge
  /sys/kernel/fast_charge/force_fast_charge                  		       u:object_r:vendor_sysfs_fastcharge:s0
  /sys/kernel/fastchgtoggle/enabled         		      		       u:object_r:vendor_sysfs_fastcharge:s0
+
+# ZRAM
+/sys/block/zram0/comp_algorithm 					       u:object_r:sysfs_zram:s0

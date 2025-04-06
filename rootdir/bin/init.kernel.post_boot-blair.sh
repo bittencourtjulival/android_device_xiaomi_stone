@@ -33,7 +33,12 @@
 
 function configure_zram_parameters() {
     local zramSizeGB=$(getprop persist.vendor.zram.size)
-    
+    local zramComp=$(getprop persist.vendor.zram.comp_algorithm)
+    local swappiness=$(getprop persist.vendor.vm.swappiness)
+
+    # Set swappiness
+    echo ${swappiness:-60} > /proc/sys/vm/swappiness
+
     case "$zramSizeGB" in
         0)
             zRamSizeMB=0
@@ -64,6 +69,13 @@ function configure_zram_parameters() {
     esac
 
     if [ -f /sys/block/zram0/disksize ]; then
+        # Set compression algorithm
+        if [ -n "$zramComp" ] && grep -q "$zramComp" /sys/block/zram0/comp_algorithm; then
+            echo "$zramComp" > /sys/block/zram0/comp_algorithm
+        else
+            echo "lz4" > /sys/block/zram0/comp_algorithm
+        fi
+
         if [ -f /sys/block/zram0/use_dedup ]; then
             echo 1 > /sys/block/zram0/use_dedup
         fi
@@ -82,24 +94,13 @@ function configure_zram_parameters() {
 }
 
 function configure_memory_parameters() {
-	# Set Memory parameters.
-
-	# Set swappiness to 60 for all targets
-	echo 60 > /proc/sys/vm/swappiness
-
-	# Set lz4 algorithm for zRAM compression
-	echo lz4 > /sys/block/zram0/comp_algorithm
-
-	# Disable wsf for all targets beacause we are using efk.
-	# wsf Range : 1..1000 So set to bare minimum value 1.
-	echo 1 > /proc/sys/vm/watermark_scale_factor
-	configure_zram_parameters
+    # Disable wsf for all targets because we are using efk.
+    # wsf Range : 1..1000 So set to bare minimum value 1.
+    echo 1 > /proc/sys/vm/watermark_scale_factor
+    configure_zram_parameters
         
-        #M17-T code for HQ-264248 by liuhelong at 2022/12/8 start
-	#Spawn 1 kswapd threads which can help in fast reclaiming of pages
-	echo 1 > /proc/sys/vm/kswapd_threads
-        #M17-T code for HQ-264248 by liuhelong at 2022/12/8 end
-        
+    # Spawn 1 kswapd threads which can help in fast reclaiming of pages
+    echo 1 > /proc/sys/vm/kswapd_threads
 }
 
 # Core control parameters for silver

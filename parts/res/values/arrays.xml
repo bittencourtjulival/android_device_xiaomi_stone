@@ -140,4 +140,17 @@
          <item>8</item>
          <item>-1</item>
      </string-array>
+    
+     <string-array name="zram_compression_entries">
+     	<item>lz4 (default)</item>
+     	<item>lzo</item>
+     	<item>lzo-rle</item>
+     	<item>zstd</item>
+ 	</string-array>
+     <string-array name="zram_compression_values">
+     	<item>lz4</item>
+     	<item>lzo</item>
+     	<item>lzo-rle</item>
+     	<item>zstd</item>
+     </string-array>
 </resources>

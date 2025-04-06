@@ -21,3 +21,5 @@ ro.vendor.ril.svdo                  u:object_r:vendor_radio_prop:s0
 
 # ZRAM
 persist.vendor.zram.size 	    u:object_r:vendor_zram_prop:s0
+persist.vendor.zram.comp_algorithm  u:object_r:vendor_zram_prop:s0
+persist.vendor.vm.swappiness	    u:object_r:vendor_zram_prop:s0

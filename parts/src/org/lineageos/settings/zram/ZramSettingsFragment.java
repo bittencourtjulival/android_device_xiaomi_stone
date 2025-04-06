@@ -23,25 +23,50 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragment;
 import org.lineageos.settings.R;
+import org.lineageos.settings.zram.CustomSeekBarPreference;
 
 public class ZramSettingsFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_ZRAM_SIZE = "zram_size";
+    private static final String KEY_ZRAM_COMPRESSION = "zram_compression";
+    private static final String KEY_SWAPPINESS = "swappiness";
+    
     private ListPreference mZramSizePreference;
+    private ListPreference mZramCompressionPreference;
+    private CustomSeekBarPreference mSwappinessPreference;
     private ZramUtils mZramUtils;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.zram_settings, rootKey);
         mZramUtils = new ZramUtils(getActivity());
-        
+    
+        // Initialize ZRAM size preference
         mZramSizePreference = (ListPreference) findPreference(KEY_ZRAM_SIZE);
         if (mZramSizePreference != null) {
             int currentSize = mZramUtils.getCurrentZramSize();
             mZramSizePreference.setValue(String.valueOf(currentSize));
             updateSummary(currentSize);
             mZramSizePreference.setOnPreferenceChangeListener(this);
+        }
+    
+        // Initialize compression algorithm preference
+        mZramCompressionPreference = (ListPreference) findPreference(KEY_ZRAM_COMPRESSION);
+        if (mZramCompressionPreference != null) {
+            String currentComp = mZramUtils.getCurrentCompression();
+            mZramCompressionPreference.setValue(currentComp);
+            mZramCompressionPreference.setSummary(currentComp);
+            mZramCompressionPreference.setOnPreferenceChangeListener(this);
+        }
+    
+        // Initialize swappiness preference
+        CustomSeekBarPreference swappinessPref = (CustomSeekBarPreference) findPreference(KEY_SWAPPINESS);
+        if (swappinessPref != null) {
+            int currentSwappiness = mZramUtils.getCurrentSwappiness();
+            swappinessPref.setValue(currentSwappiness);
+            swappinessPref.setOnPreferenceChangeListener(this);
+            updateSwappinessSummary(currentSwappiness);
         }
     }
 
@@ -61,6 +86,21 @@ public class ZramSettingsFragment extends PreferenceFragment
             } catch (NumberFormatException e) {
                 return false;
             }
+        } else if (KEY_ZRAM_COMPRESSION.equals(preference.getKey())) {
+            String algorithm = (String) newValue;
+            mZramUtils.setCompressionAlgorithm(algorithm);
+            mZramCompressionPreference.setSummary(algorithm);
+            
+            new AlertDialog.Builder(getActivity())
+                .setMessage(R.string.zram_reboot_recommended)
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
+            return true;
+        } else if (KEY_SWAPPINESS.equals(preference.getKey())) {
+            int value = (Integer) newValue;
+            mZramUtils.setSwappiness(value);
+            updateSwappinessSummary(value);
+            return true;
         }
         return false;
     }
@@ -75,5 +115,11 @@ public class ZramSettingsFragment extends PreferenceFragment
             default: summary = getString(R.string.zram_size_dynamic);
         }
         mZramSizePreference.setSummary(summary);
+    }
+    
+    private void updateSwappinessSummary(int value) {
+        if (mSwappinessPreference != null) {
+            mSwappinessPreference.setSummary(getString(R.string.swappiness_value, value));
+        }
     }
 }
