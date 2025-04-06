@@ -32,43 +32,53 @@
 #=============================================================================
 
 function configure_zram_parameters() {
-	MemTotalStr=`cat /proc/meminfo | grep MemTotal`
-	MemTotal=${MemTotalStr:16:8}
+    local zramSizeGB=$(getprop persist.vendor.zram.size)
+    
+    case "$zramSizeGB" in
+        0)
+            zRamSizeMB=0
+            echo "ZRAM disabled by user choice."
+            return
+            ;;
+        2)
+            zRamSizeMB=2048
+            ;;
+        4)
+            zRamSizeMB=4096
+            ;;
+        8)
+            zRamSizeMB=8192
+            ;;
+        *)
+            # Default dynamic calculation
+            MemTotalStr=$(grep MemTotal /proc/meminfo)
+            MemTotal=${MemTotalStr:16:8}
+            let RamSizeGB="( $MemTotal / 1048576 ) + 1"
+            if [ $RamSizeGB -le 2 ]; then
+                let zRamSizeMB="( $RamSizeGB * 1024 ) * 3 / 4"
+            else
+                let zRamSizeMB="( $RamSizeGB * 1024 ) / 2"
+            fi
+            [ $zRamSizeMB -gt 4096 ] && zRamSizeMB=4096
+            ;;
+    esac
 
-	# Zram disk - 75% for < 2GB devices .
-	# For >2GB devices, size = 50% of RAM size. Limit the size to 4GB.
+    if [ -f /sys/block/zram0/disksize ]; then
+        if [ -f /sys/block/zram0/use_dedup ]; then
+            echo 1 > /sys/block/zram0/use_dedup
+        fi
+        echo "${zRamSizeMB}M" > /sys/block/zram0/disksize
 
-	let RamSizeGB="( $MemTotal / 1048576 ) + 1"
-	diskSizeUnit=M
-	if [ $RamSizeGB -le 2 ]; then
-		let zRamSizeMB="( $RamSizeGB * 1024 ) * 3 / 4"
-	else
-		let zRamSizeMB="( $RamSizeGB * 1024 ) / 2"
-	fi
+        if [ -e /sys/kernel/slab/zs_handle ]; then
+            echo 0 > /sys/kernel/slab/zs_handle/store_user
+        fi
+        if [ -e /sys/kernel/slab/zspage ]; then
+            echo 0 > /sys/kernel/slab/zspage/store_user
+        fi
 
-	# use MB avoid 32 bit overflow
-	if [ $zRamSizeMB -gt 4096 ]; then
-		let zRamSizeMB=4096
-	fi
-
-	if [ -f /sys/block/zram0/disksize ]; then
-		if [ -f /sys/block/zram0/use_dedup ]; then
-			echo 1 > /sys/block/zram0/use_dedup
-		fi
-		echo "$zRamSizeMB""$diskSizeUnit" > /sys/block/zram0/disksize
-
-		# ZRAM may use more memory than it saves if SLAB_STORE_USER
-		# debug option is enabled.
-		if [ -e /sys/kernel/slab/zs_handle ]; then
-			echo 0 > /sys/kernel/slab/zs_handle/store_user
-		fi
-		if [ -e /sys/kernel/slab/zspage ]; then
-			echo 0 > /sys/kernel/slab/zspage/store_user
-		fi
-
-		mkswap /dev/block/zram0
-		swapon /dev/block/zram0 -p 32758
-	fi
+        mkswap /dev/block/zram0
+        swapon /dev/block/zram0 -p 32758
+    fi
 }
 
 function configure_memory_parameters() {
