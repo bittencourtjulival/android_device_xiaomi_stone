@@ -70,8 +70,11 @@
     <string name="fastcharge_title">Fastcharging</string>
     <string name="fastcharge_summary">Configure fastcharge options</string>
     <string name="fastcharge_category_title">Fastcharge options</string>
-    <string name="fastcharge_normal_title">Enable for normal chargers</string>
-    <string name="fastcharge_normal_summary">Enable fastcharging when using wall chargers</string>
+    <string name="fastcharge_normal_title">Charging speed</string>
+    <string name="fastcharge_normal_summary">Select charging speed for wall chargers</string>
+    <string name="fastcharge_normal_30w_summary">Fast charging (30W)</string>
+    <string name="fastcharge_normal_15w_summary">Medium charging (15W)</string>
+    <string name="fastcharge_normal_8w_summary">Slow charging (8W)</string>
     <string name="fastcharge_usb_title">Enable for USB</string>
     <string name="fastcharge_usb_summary">Enable fastcharging when using USB ports</string>
     <string name="fastcharge_normal_unavailable">Fast charging not supported on this device</string>

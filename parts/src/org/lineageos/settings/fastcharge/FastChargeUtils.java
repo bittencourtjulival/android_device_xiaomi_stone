@@ -31,19 +31,24 @@ public class FastChargeUtils {
     private static final String PREF_NORMAL_CHARGE = "fastcharge_normal";
     private static final String PREF_USB_CHARGE = "fastcharge_usb";
 
+    // Charging modes
+    public static final int MODE_30W = 2;
+    public static final int MODE_15W = 1;
+    public static final int MODE_8W = 0;
+
     private SharedPreferences mSharedPrefs;
 
     public FastChargeUtils(Context context) {
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public boolean isNormalFastChargeEnabled() {
+    public int getNormalFastChargeMode() {
         try {
             String value = FileUtils.readOneLine(NORMAL_CHARGE_NODE);
-            return value != null && value.equals("1");
+            return value != null ? Integer.parseInt(value) : MODE_30W;
         } catch (Exception e) {
             Log.e(TAG, "Failed to read normal fast charge status", e);
-            return false;
+            return MODE_30W;
         }
     }
 
@@ -57,10 +62,10 @@ public class FastChargeUtils {
         }
     }
 
-    public void enableNormalFastCharge(boolean enable) {
+    public void setNormalFastChargeMode(String mode) {
         try {
-            FileUtils.writeLine(NORMAL_CHARGE_NODE, enable ? "1" : "0");
-            mSharedPrefs.edit().putBoolean(PREF_NORMAL_CHARGE, enable).apply();
+            FileUtils.writeLine(NORMAL_CHARGE_NODE, mode);
+            mSharedPrefs.edit().putString(PREF_NORMAL_CHARGE, mode).apply();
         } catch (Exception e) {
             Log.e(TAG, "Failed to write normal fast charge status", e);
         }
@@ -76,12 +81,12 @@ public class FastChargeUtils {
     }
     
     public boolean isNodeAccessible(String node) {
-    	try {
+        try {
             String value = FileUtils.readOneLine(node);
             return true;
-    	} catch (Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, "Node " + node + " not accessible", e);
             return false;
-    	}
-    }	
+        }
+    }
 }
