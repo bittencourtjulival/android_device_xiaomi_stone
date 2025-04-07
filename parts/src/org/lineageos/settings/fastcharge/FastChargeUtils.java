@@ -28,8 +28,10 @@ public class FastChargeUtils {
     private static final String TAG = "FastChargeUtils";
     public static final String NORMAL_CHARGE_NODE = "/sys/kernel/fastchgtoggle/enabled";
     public static final String USB_CHARGE_NODE = "/sys/kernel/fast_charge/force_fast_charge";
+    public static final String THERMAL_BOOST_NODE = "/sys/kernel/fastchgtoggle/thermals";
     private static final String PREF_NORMAL_CHARGE = "fastcharge_normal";
     private static final String PREF_USB_CHARGE = "fastcharge_usb";
+    private static final String PREF_THERMAL_BOOST = "thermal_boost";
 
     // Charging modes
     public static final int MODE_30W = 2;
@@ -62,6 +64,16 @@ public class FastChargeUtils {
         }
     }
 
+    public boolean isThermalBoostEnabled() {
+        try {
+            String value = FileUtils.readOneLine(THERMAL_BOOST_NODE);
+            return value != null && value.equals("1");
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to read thermal boost status", e);
+            return false;
+        }
+    }
+
     public void setNormalFastChargeMode(String mode) {
         try {
             FileUtils.writeLine(NORMAL_CHARGE_NODE, mode);
@@ -79,6 +91,15 @@ public class FastChargeUtils {
             Log.e(TAG, "Failed to write USB fast charge status", e);
         }
     }
+
+    public void enableThermalBoost(boolean enable) {
+        try {
+            FileUtils.writeLine(THERMAL_BOOST_NODE, enable ? "1" : "0");
+            mSharedPrefs.edit().putBoolean(PREF_THERMAL_BOOST, enable).apply();
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to write thermal boost status", e);
+        }
+    }
     
     public boolean isNodeAccessible(String node) {
         try {
@@ -88,5 +109,9 @@ public class FastChargeUtils {
             Log.e(TAG, "Node " + node + " not accessible", e);
             return false;
         }
+    }
+    
+    public boolean isThermalBoostSupported() {
+        return isNodeAccessible(THERMAL_BOOST_NODE);
     }
 }

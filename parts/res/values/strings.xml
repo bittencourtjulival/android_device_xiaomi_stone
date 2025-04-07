@@ -79,6 +79,9 @@
     <string name="fastcharge_usb_summary">Enable fastcharging when using USB ports</string>
     <string name="fastcharge_normal_unavailable">Fast charging not supported on this device</string>
     <string name="fastcharge_usb_unavailable">USB fast charging not supported on this device</string>
+    <string name="fastcharge_thermal_title">Thermal boost</string>
+    <string name="fastcharge_thermal_summary">Increase thermal limits for faster charging (not recommended)</string>
+    <string name="fastcharge_thermal_warning">Warning: Increasing thermal limits may reduce battery lifespan and cause higher temperatures. Use at your own risk!</string>
     
       <!-- Zram Settings -->
     <string name="zram_size_title">ZRAM size</string>

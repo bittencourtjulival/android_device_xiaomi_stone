@@ -14,5 +14,11 @@
             android:title="@string/fastcharge_usb_title"
             android:summary="@string/fastcharge_usb_summary"
             android:persistent="true" />
+
+	<SwitchPreference
+    	    android:key="thermal_boost"
+    	    android:title="@string/fastcharge_thermal_title"
+            android:summary="@string/fastcharge_thermal_summary"
+	    android:defaultValue="false" />
     </PreferenceCategory>
 </PreferenceScreen>

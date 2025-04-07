@@ -18,6 +18,7 @@ package org.lineageos.settings.fastcharge;
 
 import android.content.Context;
 import android.os.Bundle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.ListPreference;
@@ -30,9 +31,11 @@ public class FastChargeSettingsFragment extends PreferenceFragment
 
     private static final String KEY_NORMAL_CHARGER = "fastcharge_normal";
     private static final String KEY_USB_CHARGER = "fastcharge_usb";
+    private static final String KEY_THERMAL_BOOST = "thermal_boost";
 
     private ListPreference mNormalChargerPreference;
     private SwitchPreference mUsbChargerPreference;
+    private SwitchPreference mThermalBoostPreference;
     private FastChargeUtils mFastChargeUtils;
 
     @Override
@@ -43,9 +46,11 @@ public class FastChargeSettingsFragment extends PreferenceFragment
         
         mNormalChargerPreference = (ListPreference) findPreference(KEY_NORMAL_CHARGER);
         mUsbChargerPreference = (SwitchPreference) findPreference(KEY_USB_CHARGER);
+        mThermalBoostPreference = (SwitchPreference) findPreference(KEY_THERMAL_BOOST);
 
         boolean normalChargeSupported = mFastChargeUtils.isNodeAccessible(FastChargeUtils.NORMAL_CHARGE_NODE);
         boolean usbChargeSupported = mFastChargeUtils.isNodeAccessible(FastChargeUtils.USB_CHARGE_NODE);
+        boolean thermalBoostSupported = mFastChargeUtils.isThermalBoostSupported();
 
         if (mNormalChargerPreference != null) {
             mNormalChargerPreference.setEnabled(normalChargeSupported);
@@ -66,6 +71,16 @@ public class FastChargeSettingsFragment extends PreferenceFragment
                 mUsbChargerPreference.setOnPreferenceChangeListener(this);
             } else {
                 mUsbChargerPreference.setSummary(R.string.fastcharge_usb_unavailable);
+            }
+        }
+
+        if (mThermalBoostPreference != null) {
+            mThermalBoostPreference.setEnabled(thermalBoostSupported);
+            if (thermalBoostSupported) {
+                mThermalBoostPreference.setChecked(mFastChargeUtils.isThermalBoostEnabled());
+                mThermalBoostPreference.setOnPreferenceChangeListener(this);
+            } else {
+                mThermalBoostPreference.setSummary(R.string.fastcharge_normal_unavailable);
             }
         }
     }
@@ -93,7 +108,26 @@ public class FastChargeSettingsFragment extends PreferenceFragment
                 boolean value = (Boolean) newValue;
                 mFastChargeUtils.enableUsbFastCharge(value);
                 return true;
+            case KEY_THERMAL_BOOST:
+                boolean thermalValue = (Boolean) newValue;
+                if (thermalValue) {
+                    new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.fastcharge_thermal_title)
+                        .setMessage(R.string.fastcharge_thermal_warning)
+                        .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                            mFastChargeUtils.enableThermalBoost(true);
+                            mThermalBoostPreference.setChecked(true);
+                        })
+                        .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                            mThermalBoostPreference.setChecked(false);
+                        })
+                        .show();
+                    return false;
+                } else {
+                    mFastChargeUtils.enableThermalBoost(false);
+                    return true;
+                }
         }
         return false;
     }
-}    
+}
