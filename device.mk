@@ -35,6 +35,10 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_vendor=ext4 \
     POSTINSTALL_OPTIONAL_vendor=true
 
+# RemovePackages
+ PRODUCT_PACKAGES += \
+     RemovePackagesStone
+
 PRODUCT_PACKAGES += \
     checkpoint_gc \
     otapreopt_script
