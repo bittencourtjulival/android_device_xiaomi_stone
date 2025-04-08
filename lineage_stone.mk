@@ -28,7 +28,9 @@ PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_MODEL := Redmi Note 12 5G
 PRODUCT_NAME := lineage_stone
 
+# GMS
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
+TARGET_USES_PICO_GAPPS := true
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BuildDesc="sunstone_global-user 14 UKQ1.230917.001 V816.0.10.0.UMQMIXM release-keys" \
