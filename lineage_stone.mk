@@ -18,6 +18,10 @@ $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 # Blur
 TARGET_USES_BLUR := true
 
+# Remove EvolutionX's prebuilt
+TARGET_INCLUDE_ACCORD := false
+BUILD_BCR := false
+
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2400
 TARGET_SCREEN_WIDTH := 1080
