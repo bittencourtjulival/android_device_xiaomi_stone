@@ -35,10 +35,6 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_vendor=ext4 \
     POSTINSTALL_OPTIONAL_vendor=true
 
-# RemovePackages
- PRODUCT_PACKAGES += \
-     RemovePackagesStone
-
 PRODUCT_PACKAGES += \
     checkpoint_gc \
     otapreopt_script
@@ -223,6 +219,10 @@ PRODUCT_PACKAGES += \
 # Device-specific settings
   PRODUCT_PACKAGES += \
       XiaomiParts
+
+# RemovePackages
+ PRODUCT_PACKAGES += \
+     RemovePackagesStone
 
 # Kernel
 PRODUCT_ENABLE_UFFD_GC := false

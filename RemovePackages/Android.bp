@@ -16,6 +16,7 @@ cc_prebuilt_binary {
         "GoogleFeedback",
         "KidsSupervisionStub",
         "MaestroPrebuilt",
+        "QuickSearchBox",
      ],
      strip: {
          none: true,
