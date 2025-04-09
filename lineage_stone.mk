@@ -37,6 +37,6 @@ PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 TARGET_USES_PICO_GAPPS := true
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildDesc="sunstone_global-user 14 UKQ1.230917.001 V816.0.10.0.UMQMIXM release-keys" \
-    BuildFingerprint=Redmi/sunstone_global/sunstone:14/UKQ1.230917.001/V816.0.10.0.UMQMIXM:user/release-keys \
+    BuildDesc="sunstone_global-user 14 UKQ1.240624.001 OS2.0.1.0.UMQMIXM release-keys" \
+    BuildFingerprint=Redmi/sunstone_global/sunstone:14/UKQ1.240624.001/OS2.0.1.0.UMQMIXM:user/release-keys \
     DeviceProduct=sunstone
