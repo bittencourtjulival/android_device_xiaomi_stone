@@ -120,7 +120,7 @@ persist.bluetooth.disableabsvol=true
 persist.vendor.bluetooth.modem_nv_support=true
 vendor.qcom.bluetooth.soc=cherokee
 ro.vendor.fm.use_audio_session=true
-
+ro.bluetooth.powerstats.disable=true
 
 # Camera
 camera.disable_zsl_mode=true
