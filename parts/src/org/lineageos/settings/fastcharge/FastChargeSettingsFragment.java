@@ -32,10 +32,12 @@ public class FastChargeSettingsFragment extends PreferenceFragment
     private static final String KEY_NORMAL_CHARGER = "fastcharge_normal";
     private static final String KEY_USB_CHARGER = "fastcharge_usb";
     private static final String KEY_THERMAL_BOOST = "thermal_boost";
+    private static final String KEY_BYPASS_CHARGE = "bypass_charge";
 
     private ListPreference mNormalChargerPreference;
     private SwitchPreference mUsbChargerPreference;
     private SwitchPreference mThermalBoostPreference;
+    private SwitchPreference mBypassChargePreference;
     private FastChargeUtils mFastChargeUtils;
 
     @Override
@@ -47,10 +49,12 @@ public class FastChargeSettingsFragment extends PreferenceFragment
         mNormalChargerPreference = (ListPreference) findPreference(KEY_NORMAL_CHARGER);
         mUsbChargerPreference = (SwitchPreference) findPreference(KEY_USB_CHARGER);
         mThermalBoostPreference = (SwitchPreference) findPreference(KEY_THERMAL_BOOST);
+        mBypassChargePreference = (SwitchPreference) findPreference(KEY_BYPASS_CHARGE);
 
         boolean normalChargeSupported = mFastChargeUtils.isNodeAccessible(FastChargeUtils.NORMAL_CHARGE_NODE);
         boolean usbChargeSupported = mFastChargeUtils.isNodeAccessible(FastChargeUtils.USB_CHARGE_NODE);
         boolean thermalBoostSupported = mFastChargeUtils.isThermalBoostSupported();
+        boolean bypassChargeSupported = mFastChargeUtils.isBypassChargeSupported();
 
         if (mNormalChargerPreference != null) {
             mNormalChargerPreference.setEnabled(normalChargeSupported);
@@ -81,6 +85,16 @@ public class FastChargeSettingsFragment extends PreferenceFragment
                 mThermalBoostPreference.setOnPreferenceChangeListener(this);
             } else {
                 mThermalBoostPreference.setSummary(R.string.fastcharge_normal_unavailable);
+            }
+        }
+
+        if (mBypassChargePreference != null) {
+            mBypassChargePreference.setEnabled(bypassChargeSupported);
+            if (bypassChargeSupported) {
+                mBypassChargePreference.setChecked(mFastChargeUtils.isBypassChargeEnabled());
+                mBypassChargePreference.setOnPreferenceChangeListener(this);
+            } else {
+                mBypassChargePreference.setSummary(R.string.fastcharge_bypass_unavailable);
             }
         }
     }
@@ -125,6 +139,25 @@ public class FastChargeSettingsFragment extends PreferenceFragment
                     return false;
                 } else {
                     mFastChargeUtils.enableThermalBoost(false);
+                    return true;
+                }
+            case KEY_BYPASS_CHARGE:
+                boolean bypassValue = (Boolean) newValue;
+                if (bypassValue) {
+                    new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.fastcharge_bypass_title)
+                        .setMessage(R.string.fastcharge_bypass_warning)
+                        .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                            mFastChargeUtils.enableBypassCharge(true);
+                            mBypassChargePreference.setChecked(true);
+                        })
+                        .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                            mBypassChargePreference.setChecked(false);
+                        })
+                        .show();
+                    return false;
+                } else {
+                    mFastChargeUtils.enableBypassCharge(false);
                     return true;
                 }
         }

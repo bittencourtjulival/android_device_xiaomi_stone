@@ -1,4 +1,3 @@
-
 # Audio
 /dev/socket/audio_hw_socket                                                    u:object_r:audio_socket:s0
 /dev/elliptic(.*)?                                                             u:object_r:sound_device:s0
@@ -60,8 +59,10 @@
 /data/vendor/mac_addr(/.*)?                                                    u:object_r:vendor_wifi_vendor_data_file:s0
 
 # Fastcharge
- /sys/kernel/fast_charge/force_fast_charge                  		       u:object_r:vendor_sysfs_fastcharge:s0
- /sys/kernel/fastchgtoggle/enabled         		      		       u:object_r:vendor_sysfs_fastcharge:s0
+/sys/kernel/fast_charge/force_fast_charge                  		 	 	    u:object_r:vendor_sysfs_fastcharge:s0
+/sys/kernel/fastchgtoggle/mode	         		      		    			    u:object_r:vendor_sysfs_fastcharge:s0
+/sys/kernel/fastchgtoggle/thermals         		      		    			    u:object_r:vendor_sysfs_fastcharge:s0
+/sys/kernel/fastchgtoggle/bypass					    						    u:object_r:vendor_sysfs_fastcharge:s0
 
 # ZRAM
 /sys/block/zram0/comp_algorithm 					       u:object_r:sysfs_zram:s0

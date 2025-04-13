@@ -82,6 +82,10 @@
     <string name="fastcharge_thermal_title">Thermal boost</string>
     <string name="fastcharge_thermal_summary">Increase thermal limits for faster charging (not recommended)</string>
     <string name="fastcharge_thermal_warning">Warning: Increasing thermal limits may reduce battery lifespan and cause higher temperatures. Use at your own risk!</string>
+    <string name="fastcharge_bypass_title">Bypass charging</string>
+    <string name="fastcharge_bypass_summary">Directly power device from charger (may reduce battery wear)</string>
+    <string name="fastcharge_bypass_warning">Warning: Bypass charging may cause unstable power delivery in some cases. Use at your own risk!</string>
+    <string name="fastcharge_bypass_unavailable">Bypass charging not supported on this device</string>
     
       <!-- Zram Settings -->
     <string name="zram_size_title">ZRAM size</string>

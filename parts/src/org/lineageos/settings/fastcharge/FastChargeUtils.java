@@ -29,14 +29,21 @@ public class FastChargeUtils {
     public static final String NORMAL_CHARGE_NODE = "/sys/kernel/fastchgtoggle/enabled";
     public static final String USB_CHARGE_NODE = "/sys/kernel/fast_charge/force_fast_charge";
     public static final String THERMAL_BOOST_NODE = "/sys/kernel/fastchgtoggle/thermals";
+    public static final String BYPASS_CHARGE_NODE = "/sys/kernel/fastchgtoggle/bypass";
+    
     private static final String PREF_NORMAL_CHARGE = "fastcharge_normal";
     private static final String PREF_USB_CHARGE = "fastcharge_usb";
     private static final String PREF_THERMAL_BOOST = "thermal_boost";
+    private static final String PREF_BYPASS_CHARGE = "bypass_charge";
 
     // Charging modes
     public static final int MODE_30W = 2;
     public static final int MODE_15W = 1;
     public static final int MODE_8W = 0;
+
+    // Bypass modes
+    public static final int BYPASS_DISABLED = 0;
+    public static final int BYPASS_ENABLED = 1;
 
     private SharedPreferences mSharedPrefs;
 
@@ -74,6 +81,16 @@ public class FastChargeUtils {
         }
     }
 
+    public boolean isBypassChargeEnabled() {
+        try {
+            String value = FileUtils.readOneLine(BYPASS_CHARGE_NODE);
+            return value != null && value.equals("1");
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to read bypass charge status", e);
+            return false;
+        }
+    }
+
     public void setNormalFastChargeMode(String mode) {
         try {
             FileUtils.writeLine(NORMAL_CHARGE_NODE, mode);
@@ -100,6 +117,15 @@ public class FastChargeUtils {
             Log.e(TAG, "Failed to write thermal boost status", e);
         }
     }
+
+    public void enableBypassCharge(boolean enable) {
+        try {
+            FileUtils.writeLine(BYPASS_CHARGE_NODE, enable ? "1" : "0");
+            mSharedPrefs.edit().putBoolean(PREF_BYPASS_CHARGE, enable).apply();
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to write bypass charge status", e);
+        }
+    }
     
     public boolean isNodeAccessible(String node) {
         try {
@@ -113,5 +139,9 @@ public class FastChargeUtils {
     
     public boolean isThermalBoostSupported() {
         return isNodeAccessible(THERMAL_BOOST_NODE);
+    }
+
+    public boolean isBypassChargeSupported() {
+        return isNodeAccessible(BYPASS_CHARGE_NODE);
     }
 }
