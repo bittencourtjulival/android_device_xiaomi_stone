@@ -162,6 +162,10 @@ on boot
 
     #zhangxiaodan To realize the communication between framework and thermal, we need to implement sys node in kernel
     chown system system /sys/class/thermal/thermal_message/sconfig
+    chmod 0664 /sys/class/thermal/thermal_message/sconfig
+    chown system system /sys/class/thermal/thermal_message/sconfig
+    chmod 0666 /sys/class/thermal/thermal_message/temp_state
+    chown system system /sys/class/thermal/thermal_message/temp_state
 
     # add for fingerprint
     chown system system /sys/bus/platform/devices/soc/soc:fpc1020/compatible_all
