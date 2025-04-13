@@ -198,10 +198,12 @@ on boot
      chmod 0660 /sys/devices/platform/soc/5e00000.qcom,mdss_mdp/drm/card0/card0-DSI-1/hbm
 
     # Allow system to modify fastcharge nodes
-     chown system system /sys/kernel/fastchgtoggle/enabled
-     chmod 0660 /sys/kernel/fastchgtoggle/enabled
-     chown system system /sys/kernel/fast_charge/force_fast_charge
-     chmod 0660 /sys/kernel/fast_charge/force_fast_charge
+     chown system system /sys/kernel/fastchgtoggle/mode
+    chmod 0660 /sys/kernel/fastchgtoggle/mode
+    chown system system /sys/kernel/fastchgtoggle/thermals
+    chmod 0660 /sys/kernel/fastchgtoggle/thermals
+    chown system system /sys/kernel/fast_charge/force_fast_charge
+    chmod 0660 /sys/kernel/fast_charge/force_fast_charge
 
     # Allow system to modify swappiness
      chown system system /proc/sys/vm/swappiness
