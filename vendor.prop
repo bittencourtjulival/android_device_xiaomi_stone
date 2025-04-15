@@ -207,7 +207,21 @@ debug.hwui.use_hint_manager=true
 debug.hwui.target_cpu_time_percent=30
 
 # Logcat spam
- persist.log.tag.android.hardware.power-service-qti=E
+persist.log.tag.android.hardware.power-service-qti=E
+persist.log.tag.PowerUI=S
+persist.log.tag.BackgroundInstallControlService=S
+persist.log.tag.HWUI=S
+persist.log.tag.NetworkStack=S
+persist.log.tag.ConnectivityService=S
+persist.log.tag.Bluetooth=S
+persist.log.tag.btif=S
+persist.log.tag.bluetooth_sco=S
+persist.log.tag.SensorService=S
+persist.log.tag.SensorManager=S
+persist.log.tag.PowerManagerService=S
+persist.log.tag.BatteryService=S
+persist.log.tag.SystemServer=S
+persist.log.tag.AppOps=S
 
 # Incremental FS
 ro.incremental.enable=true
