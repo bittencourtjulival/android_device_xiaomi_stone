@@ -263,6 +263,11 @@
         <fqname>@1.0::ISoter/default</fqname>
     </hal>
     <hal format="hidl">
+        <name>vendor.qti.qspmhal</name>
+        <transport>hwbinder</transport>
+        <fqname>@1.0::IQspmhal/default</fqname>
+    </hal>
+    <hal format="hidl">
         <name>vendor.qti.hardware.wifidisplaysession</name>
         <transport>hwbinder</transport>
         <fqname>@1.0::IWifiDisplaySession/wifidisplaysession</fqname>
