@@ -231,9 +231,6 @@ ro.incremental.enable=true
 debug.stagefright.c2inputsurface=-1
 vendor.netflix.bsp_rev=Q4350-32962-1
 
-# Multi-Gen LRU
-persist.device_config.mglru_native.lru_gen_config=core
-
 # NFC
 ro.vendor.nfc.repair=1
 ro.vendor.se.type=HCE,UICC

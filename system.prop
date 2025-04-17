@@ -155,6 +155,9 @@ use.voice.path.for.pcm.voip=true
 # system prop for NFC DT
 ro.nfc.port=I2C
 
+# Multi-Gen LRU
+persist.device_config.mglru_native.lru_gen_config=core
+
 #initialize QCA1530 detection
 sys.qca1530=detect
 
