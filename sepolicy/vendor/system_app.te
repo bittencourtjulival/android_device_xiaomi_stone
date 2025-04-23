@@ -11,6 +11,8 @@ allow system_app sysfs_dsi_display_primary:file write;
 
 # Fastcharge
 allow system_app vendor_sysfs_fastcharge:file { getattr open read write };
+allow system_app vendor_sysfs_battery_supply:dir search;
+allow system_app vendor_sysfs_battery_supply:file { getattr open read write };
 
 # Allow system_app to set ZRAM property
 set_prop(system_app, vendor_zram_prop)
