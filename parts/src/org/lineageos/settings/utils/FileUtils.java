@@ -16,11 +16,11 @@
 
 package org.lineageos.settings.utils;
 
+import android.util.Log;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
-
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -163,9 +163,9 @@ public final class FileUtils {
             Log.e(TAG, "NullPointerException trying to rename " + srcPath + " to " + dstPath, e);
         }
         return ok;
-    }
-    
-        public static boolean getFileValueAsBoolean(String filename, boolean defValue) {
+   }
+
+   public static boolean getFileValueAsBoolean(String filename, boolean defValue) {
         String fileValue = readOneLine(filename);
         if(fileValue!=null){
             return (fileValue.equals("0")?false:true);
