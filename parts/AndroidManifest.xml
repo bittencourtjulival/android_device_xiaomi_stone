@@ -16,7 +16,6 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="org.lineageos.settings"
     android:versionCode="1"
     android:versionName="1.0"
@@ -25,6 +24,8 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <protected-broadcast android:name="com.android.systemui.doze.pulse" />
 
     <uses-sdk
         android:minSdkVersion="24"
@@ -44,10 +45,14 @@
             </intent-filter>
         </receiver>
 
-        <provider
-            android:name="androidx.startup.InitializationProvider"
-            android:authorities="${applicationId}.androidx-startup"
-            tools:replace="android:authorities"/>
+        <activity
+            android:name=".doze.DozeSettingsActivity"
+            android:label="@string/ambient_display_title">
+        </activity>
+
+        <service android:name=".doze.DozeService"
+                 android:permission="XiaomiDozeService">
+        </service>
 
         <activity
             android:name=".thermal.ThermalActivity"
@@ -61,9 +66,6 @@
             <meta-data
                 android:name="com.android.settings.summary"
                 android:resource="@string/thermal_summary" />
-            <meta-data
-                android:name="com.android.settings.order"
-                android:value="1" />
         </activity>
 
         <service
@@ -71,22 +73,22 @@
             android:permission="ThermalService">
         </service>
 
-        <activity
-      	    android:name=".zram.ZramActivity"
-              android:label="@string/zram_size_title">
-      	    <intent-filter>
-                  <action android:name="com.android.settings.action.IA_SETTINGS" />
-              </intent-filter>
-              <meta-data
-          	android:name="com.android.settings.category"
-          	android:value="com.android.settings.category.ia.system" />
-              <meta-data
-         		android:name="com.android.settings.summary"
-          	android:resource="@string/zram_summary" />
+	<activity
+    	    android:name=".zram.ZramActivity"
+            android:label="@string/zram_size_title">
+    	    <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
             <meta-data
-         	android:name="com.android.settings.icon"
-         	android:resource="@drawable/ic_zram" />
-         </activity>
+        	android:name="com.android.settings.category"
+        	android:value="com.android.settings.category.ia.system" />
+            <meta-data
+       		android:name="com.android.settings.summary"
+        	android:resource="@string/zram_summary" />
+            <meta-data
+        	android:name="com.android.settings.icon"
+        	android:resource="@drawable/ic_zram" />
+        </activity>
 
         <activity
             android:name=".speaker.ClearSpeakerActivity" 
@@ -102,20 +104,20 @@
                 android:resource="@string/clear_speaker_summary" />
         </activity>
 
-        <activity
-     	    android:name=".fastcharge.FastChargeActivity"
-             android:label="@string/fastcharge_title">
-     	    <intent-filter>
-                 <action android:name="com.android.settings.action.IA_SETTINGS" />
-             </intent-filter>
-             <meta-data
-         	android:name="com.android.settings.category"
-         	android:value="com.android.settings.category.ia.battery" />
-             <meta-data
-        		android:name="com.android.settings.summary"
-         	android:resource="@string/fastcharge_summary" />
- 	    </activity>
-        
+	<activity
+    	    android:name=".fastcharge.FastChargeActivity"
+            android:label="@string/fastcharge_title">
+    	    <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data
+        	android:name="com.android.settings.category"
+        	android:value="com.android.settings.category.ia.battery" />
+            <meta-data
+       		android:name="com.android.settings.summary"
+        	android:resource="@string/fastcharge_summary" />
+	</activity>
+
         <activity
             android:name=".refreshrate.RefreshActivity"
             android:label="@string/refresh_title"
@@ -136,8 +138,8 @@
             android:exported="true"
             android:permission="RefreshService">
         </service>
-        
-                <service
+
+        <service
             android:name=".display.DcDimmingTileService"
             android:exported="true"
             android:icon="@drawable/ic_dc_tile"
@@ -193,5 +195,6 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service> 
+
     </application>
 </manifest>
