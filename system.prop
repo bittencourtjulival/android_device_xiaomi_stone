@@ -188,3 +188,6 @@ ro.audio.resampler.psd.halflength=960
 ro.audio.resampler.psd.cutoff_percent=98
 ro.audio.resampler.psd.tbwcheat=0
 persist.bluetooth.sbc_hd_higher_bitrate=1
+
+# CameraX extensions
+ro.camerax.extensions.enabled=true
