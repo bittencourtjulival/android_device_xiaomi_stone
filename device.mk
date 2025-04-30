@@ -106,6 +106,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libutilscallstack.vendor
 
+$(call soong_config_set,camera,override_format_from_reserved,true)
+
 # DebugFS
 PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
 
