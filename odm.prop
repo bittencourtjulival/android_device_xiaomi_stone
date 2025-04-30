@@ -1,2 +1,5 @@
+# CameraX extensions
+ro.camerax.extensions.enabled=true
+
 # Fwk detect
 ro.vendor.qti.va_odm.support=1
