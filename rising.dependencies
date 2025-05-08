@@ -1,0 +1,23 @@
+[
+  {
+    "remote":       "devices",
+    "repository": "hardware_xiaomi",
+    "target_path": "hardware/xiaomi",
+    "revision":     "fifteen",
+    "clone-depth":  "1"
+  },
+  {
+    "remote":     "devices",
+    "repository": "vendor_xiaomi_stone",
+    "target_path": "vendor/xiaomi/stone"
+	"revision":     "fifteen",
+    "clone-depth":  "1"
+  },
+  {
+    "remote":     "devices",
+    "repository": "kernel_xiaomi_stone",
+    "target_path": "kernel/xiaomi/stone"
+	"revision":     "fifteen",
+    "clone-depth":  "1"
+  }
+]

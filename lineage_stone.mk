@@ -15,12 +15,14 @@ $(call inherit-product, $(LOCAL_PATH)/device.mk)
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-# Blur
-TARGET_USES_BLUR := true
+# rising Maintainer
+RISING_MAINTAINER := Julival Bittencourt
 
-# Remove EvolutionX's prebuilt
+# Blur
+TARGET_ENABLE_BLUR := true
+
+# Remove prebuilt
 TARGET_INCLUDE_ACCORD := false
-BUILD_BCR := false
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2400
@@ -34,9 +36,12 @@ PRODUCT_NAME := lineage_stone
 
 # GMS
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
+WITH_GMS := true
 TARGET_USES_PICO_GAPPS := true
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BuildDesc="sunstone_global-user 14 UKQ1.240624.001 OS2.0.1.0.UMQMIXM release-keys" \
     BuildFingerprint=Redmi/sunstone_global/sunstone:14/UKQ1.240624.001/OS2.0.1.0.UMQMIXM:user/release-keys \
-    DeviceProduct=sunstone
+    DeviceProduct=sunstone \
+    RisingChipset="Snapdragon 695/4 Gen1" \
+    RisingMaintainer="Julival Bittencourt"
