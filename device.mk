@@ -220,10 +220,6 @@ PRODUCT_PACKAGES += \
   PRODUCT_PACKAGES += \
       XiaomiParts
 
-# RemovePackages
- PRODUCT_PACKAGES += \
-     RemovePackagesStone
-
 # Kernel
 PRODUCT_ENABLE_UFFD_GC := false
 
