@@ -202,8 +202,10 @@ vendor.gralloc.secure_preview_buffer_format=420_sp
 vendor.gralloc.secure_preview_only=1
 
 # HWUI
+ro.hwui.render_ahead=3
 debug.hwui.use_hint_manager=true
-debug.hwui.target_cpu_time_percent=30
+debug.hwui.target_cpu_time_percent=40
+debug.hwui.render_thread_count=2
 
 # Logcat spam
 persist.log.tag.android.hardware.power-service-qti=E
