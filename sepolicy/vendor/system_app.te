@@ -9,6 +9,10 @@ allow system_app vendor_sysfs_graphics:dir { search open read };
 allow system_app sysfs_dsi_display_primary:dir search;
 allow system_app sysfs_dsi_display_primary:file write;
 
+# Core Control
+allow system_app vendor_sysfs_corecontrol:dir search;
+allow system_app vendor_sysfs_corecontrol:file { getattr open read write };
+
 # Fastcharge
 allow system_app vendor_sysfs_fastcharge:file { getattr open read write };
 allow system_app vendor_sysfs_battery_supply:dir search;

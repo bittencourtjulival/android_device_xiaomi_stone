@@ -30,6 +30,9 @@
 /vendor/lib64/libwa_widelens_undistort\.so                                     u:object_r:same_process_hal_file:s0
 /vendor/lib64/libxml2_vendor\.so                                               u:object_r:same_process_hal_file:s0
 
+# Core Control
+/sys/devices/system/cpu/cpu[0-7]/online					       u:object_r:vendor_sysfs_corecontrol:s0
+
 # Fingerprint
 /dev/goodix_fp                                                                 u:object_r:vendor_fingerprint_device:s0
 /dev/spidev0.0                                                                 u:object_r:vendor_fingerprint_device:s0

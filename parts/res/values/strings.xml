@@ -106,4 +106,17 @@
     <string name="swappiness_value">%1$d</string>
     <string name="zram_change_failed">Failed to apply ZRAM settings</string>
     <string name="advanced_settings">Advanced settings</string>
+
+    <!-- Core Control -->
+    <string name="core_control_title">Core Control</string>
+    <string name="core_control_summary">Manually enable or disable individual CPU cores</string>
+    <string name="core_control_description">Advanced CPU control. Turning off cores may save battery or thermal load, but may affect performance and stability.\n\nAt least two little cores must remain online at all times.</string>
+    <string name="core_0">Core 0</string>
+    <string name="core_1">Core 1</string>
+    <string name="core_2">Core 2</string>
+    <string name="core_3">Core 3</string>
+    <string name="core_4">Core 4</string>
+    <string name="core_5">Core 5</string>
+    <string name="core_6">Core 6 (Big)</string>
+    <string name="core_7">Core 7 (Big)</string>
 </resources>

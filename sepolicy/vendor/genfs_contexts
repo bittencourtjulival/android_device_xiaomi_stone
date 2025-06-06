@@ -4,6 +4,9 @@ genfscon sysfs /devices/platform/soc/4c84000.i2c/i2c-1/1-0071/power_supply/sm560
 genfscon sysfs /devices/platform/soc/soc:charger-manager/power_supply/battery      u:object_r:vendor_sysfs_battery_supply:s0
 genfscon sysfs /devices/platform/soc/soc:maxim_ds28e16/power_supply/batt_verify    u:object_r:vendor_sysfs_battery_supply:s0
 
+# Core Control
+genfscon sysfs /devices/system/cpu/cpu[0-7]/online   u:object_r:vendor_sysfs_corecontrol:s0
+
 # Extcon
 genfscon sysfs /devices/platform/soc/soc:rt-pd-manager/extcon                      u:object_r:sysfs_extcon:s0
 
