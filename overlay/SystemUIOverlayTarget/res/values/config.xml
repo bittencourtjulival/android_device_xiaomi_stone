@@ -36,4 +36,7 @@
 
     <!-- Preferred max refresh rate at AOD & Ambient Display, if supported by the display. -->
     <integer name="config_aodMaxRefreshRate">60</integer>
+
+    <!-- Sets AOD/Ambient Display brightness to 15% (from 0 to 255, 20% ≈ 50) -->
+    <integer name="config_screenBrightnessDoze">38</integer>
 </resources>
