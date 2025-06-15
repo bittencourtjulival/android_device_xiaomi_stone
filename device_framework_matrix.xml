@@ -53,5 +53,12 @@
              <name>IQspmhal</name>
              <instance>default</instance>
          </interface>
-     </hal>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>android.hardware.graphics.allocator</name>
+        <interface>
+            <name>IAllocator</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
 </compatibility-matrix>
