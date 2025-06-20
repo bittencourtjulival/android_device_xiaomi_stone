@@ -16,7 +16,6 @@ persist.vendor.audio.voicecall.speaker.stereo=true
 ro.config.vc_call_vol_steps=11
 ro.vendor.audio.sdk.fluencetype=none
 ro.vendor.audio.sdk.ssr=false
-vendor.audio.adm.buffering.ms=2
 ro.vendor.audio.soundfx.usb=true
 ro.vendor.audio.soundtrigger.adjconf=true
 ro.vendor.audio.soundtrigger.appdefine.cnn.level=45
