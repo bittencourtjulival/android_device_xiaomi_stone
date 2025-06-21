@@ -119,4 +119,22 @@
     <string name="core_5">Core 5</string>
     <string name="core_6">Core 6 (Big)</string>
     <string name="core_7">Core 7 (Big)</string>
+
+    <!-- Kernel Manager -->
+    <string name="kernel_manager_title">Kernel Manager</string>
+    <string name="kernel_manager_summary">Manage CPU frequencies and governor</string>
+    <string name="cpu_governor_title">CPU Governor</string>
+    <string name="cpu_governor_summary">Current: %s</string>
+    <string name="cpu_min_freq_title">Minimum Frequency</string>
+    <string name="cpu_max_freq_title">Maximum Frequency</string>
+    <string name="efficiency_cluster_title">Efficiency Cluster</string>
+    <string name="performance_cluster_title">Performance Cluster</string>
+    <string name="kernel_info_category">Information</string>
+    <string name="kernel_info_title">About Kernel Manager</string>
+    <string name="kernel_info_summary">Manage CPU governor and frequency scaling for all CPU clusters. Changes may affect performance and battery life.</string>
+    <string name="apply_settings">Apply Settings</string>
+    <string name="reset_settings">Reset to Default</string>
+    <string name="settings_applied">Settings applied successfully</string>
+    <string name="settings_reset">Settings reset to default</string>
+
 </resources>

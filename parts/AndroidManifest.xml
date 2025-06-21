@@ -133,6 +133,20 @@
         </activity>
 
         <activity
+            android:name=".kernelmanager.KernelManagerActivity"
+            android:label="@string/kernel_manager_title">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.battery" />
+            <meta-data
+                android:name="com.android.settings.summary"
+                android:resource="@string/kernel_manager_summary" />
+            </activity>
+
+        <activity
             android:name=".refreshrate.RefreshActivity"
             android:label="@string/refresh_title"
             android:exported="false">
