@@ -146,6 +146,20 @@
                 android:resource="@string/kernel_manager_summary" />
             </activity>
 
+            <activity
+                android:name=".gpumanager.GpuManagerActivity"
+                android:label="@string/gpu_manager_title">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.battery" />
+            <meta-data
+                android:name="com.android.settings.summary"
+                android:resource="@string/gpu_manager_summary" />
+            </activity>
+
         <activity
             android:name=".refreshrate.RefreshActivity"
             android:label="@string/refresh_title"

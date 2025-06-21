@@ -27,3 +27,10 @@ get_prop(system_app, vendor_default_prop)
 # Kernel Manager
 allow system_app sysfs_devices_system_cpu:file { open read write };
 allow system_app sysfs_devices_system_cpu:dir search;
+
+# GPU Manager
+allow system_app sysfs_kgsl:file { getattr open read write };
+allow system_app sysfs_kgsl:dir search;
+allow system_app vendor_sysfs_kgsl_gpuclk:file { getattr open read write };
+allow system_app vendor_sysfs_kgsl_gpuclk:dir search;
+allow system_app sysfs_kgsl:lnk_file read;
