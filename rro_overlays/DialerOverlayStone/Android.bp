@@ -4,7 +4,6 @@
 //
 
 runtime_resource_overlay {
-    name: "CarrierConfigOverlayCommon",
-    aaptflags: ["--keep-raw-values"],
+    name: "DialerOverlayStone",
     product_specific: true,
 }

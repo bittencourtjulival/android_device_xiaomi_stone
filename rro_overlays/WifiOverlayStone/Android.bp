@@ -4,6 +4,6 @@
 //
 
 runtime_resource_overlay {
-    name: "WifiOverlayTarget",
+    name: "WifiOverlayStone",
     vendor: true,
 }

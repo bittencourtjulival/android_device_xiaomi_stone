@@ -269,28 +269,24 @@ PRODUCT_PACKAGES += \
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-lineage
-
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
+# Overlay RRO
 PRODUCT_PACKAGES += \
-    CarrierConfigOverlayCommon \
-    DialerOverlayCommon \
-    TelephonyOverlayCommon
-
-PRODUCT_PACKAGES += \
-    FrameworkOverlayTarget \
-    SettingsOverlayTarget \
-    SettingsProviderOverlayTarget \
-    SystemUIOverlayTarget \
-    WifiOverlayTarget
-
-PRODUCT_PACKAGES += \
+    CarrierConfigOverlayStone \
+    DialerOverlayStone \
+    TelephonyOverlayStone \
+    FrameworkOverlayStone \
+    SettingsOverlayStone \
+    SettingsProviderOverlayStone \
+    SystemUIOverlayStone \
+    WifiOverlayStone \ 
     FrameworkOverlayMoonstone \
     FrameworkOverlaySunstone
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/overlay/config-odm.xml:$(TARGET_COPY_OUT_ODM)/overlay/config/config.xml \
-    $(LOCAL_PATH)/overlay/config-vendor.xml:$(TARGET_COPY_OUT_VENDOR)/overlay/config/config.xml
+    $(LOCAL_PATH)/rro_overlays/config-odm.xml:$(TARGET_COPY_OUT_ODM)/overlay/config/config.xml \
+    $(LOCAL_PATH)/rro_overlays/config-vendor.xml:$(TARGET_COPY_OUT_VENDOR)/overlay/config/config.xml
 
 # Partitions
 PRODUCT_PACKAGES += \

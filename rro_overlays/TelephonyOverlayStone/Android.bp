@@ -4,7 +4,6 @@
 //
 
 runtime_resource_overlay {
-    name: "SettingsProviderOverlayTarget",
-    sdk_version: "current",
-    product_specific: true
+    name: "TelephonyOverlayStone",
+    product_specific: true,
 }

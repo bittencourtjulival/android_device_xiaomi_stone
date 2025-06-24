@@ -4,6 +4,7 @@
 //
 
 runtime_resource_overlay {
-    name: "SystemUIOverlayTarget",
-    vendor: true,
+    name: "CarrierConfigOverlayStone",
+    aaptflags: ["--keep-raw-values"],
+    product_specific: true,
 }

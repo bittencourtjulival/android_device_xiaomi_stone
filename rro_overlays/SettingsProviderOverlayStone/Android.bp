@@ -4,6 +4,7 @@
 //
 
 runtime_resource_overlay {
-    name: "DialerOverlayCommon",
-    product_specific: true,
+    name: "SettingsProviderOverlayStone",
+    sdk_version: "current",
+    product_specific: true
 }
