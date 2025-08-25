@@ -274,6 +274,8 @@ ro.vendor.radio.fastdormancy=true
 ro.vendor.radio.features_common=3
 persist.vendor.sys.modem.diag=0
 persist.vendor.ssr.enable_ramdumps=0
+persist.vendor.qcomsysd.enabled=false
+persist.vendor.perf.enable_logger=false
 
 # Sensors
 persist.vendor.sensors.enable.bypass_worker=true
