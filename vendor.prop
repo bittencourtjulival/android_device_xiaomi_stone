@@ -202,6 +202,7 @@ persist.vendor.fingerprint.sensor_modules=fpc,goodix
 debug.sf.disable_client_composition_cache=1
 debug.sf.enable_advanced_sf_phase_offset=1
 debug.sf.enable_gl_backpressure=0
+debug.sf.enable_adpf_cpu_hint=true
 debug.sf.frame_rate_multiple_threshold=60
 debug.sf.high_fps_early_gl_phase_offset_ns=-4000000
 debug.sf.high_fps_early_phase_offset_ns=-4000000
