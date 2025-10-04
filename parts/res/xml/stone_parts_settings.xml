@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- CPU -->
+    <PreferenceCategory
+        android:key="category_cpu"
+        android:title="@string/category_cpu_title">
+
+        <Preference
+            android:key="kernel_manager"
+            android:title="@string/kernel_manager_title"
+            android:summary="@string/kernel_manager_summary"
+            android:icon="@drawable/ic_kernel_manager" />
+
+        <Preference
+            android:key="core_control"
+            android:title="@string/core_control_title"
+            android:summary="@string/core_control_summary"
+            android:icon="@drawable/ic_cpu" />
+    </PreferenceCategory>
+
+    <!-- GPU -->
+    <PreferenceCategory
+        android:key="category_gpu"
+        android:title="@string/category_gpu_title">
+
+        <Preference
+            android:key="gpu_manager"
+            android:title="@string/gpu_manager_title"
+            android:summary="@string/gpu_manager_summary"
+            android:icon="@drawable/ic_gpu_manager" />
+    </PreferenceCategory>
+
+    <!-- Memory -->
+    <PreferenceCategory
+        android:key="category_memory"
+        android:title="@string/category_memory_title">
+
+        <Preference
+            android:key="zram"
+            android:title="@string/zram_size_title"
+            android:summary="@string/zram_summary"
+            android:icon="@drawable/ic_zram" />
+    </PreferenceCategory>
+
+    <!-- Battery -->
+    <PreferenceCategory
+        android:key="category_battery"
+        android:title="@string/category_battery_title">
+
+        <Preference
+            android:key="fast_charge"
+            android:title="@string/fastcharge_title"
+            android:summary="@string/fastcharge_summary"
+            android:icon="@drawable/ic_fast_charge" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
