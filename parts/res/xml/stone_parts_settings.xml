@@ -17,6 +17,30 @@
             android:title="@string/core_control_title"
             android:summary="@string/core_control_summary"
             android:icon="@drawable/ic_cpu" />
+
+        <Preference
+            android:key="thermal"
+            android:title="@string/thermal_title"
+            android:summary="@string/thermal_summary"
+            android:icon="@drawable/ic_thermal" />
+    </PreferenceCategory>
+
+    <!-- Display -->
+    <PreferenceCategory
+        android:key="category_display"
+        android:title="@string/category_display_title">
+
+        <Preference
+            android:key="hbm"
+            android:title="@string/hbm_fragment_title"
+            android:summary="@string/hbm_fragment_summary"
+            android:icon="@drawable/ic_hbm" />
+
+        <Preference
+            android:key="dc_dimming"
+            android:title="@string/dc_dimming_enable_title"
+            android:summary="@string/dc_dimming_enable_summary"
+            android:icon="@drawable/ic_dc_dimming" />
     </PreferenceCategory>
 
     <!-- GPU -->
@@ -39,8 +63,20 @@
         <Preference
             android:key="zram"
             android:title="@string/zram_size_title"
-            android:summary="@string/zram_summary"
+            android:summary="@string/zram_size_summary"
             android:icon="@drawable/ic_zram" />
+    </PreferenceCategory>
+
+    <!-- Audio -->
+    <PreferenceCategory
+        android:key="category_audio"
+        android:title="@string/category_audio_title">
+
+        <Preference
+            android:key="clear_speaker"
+            android:title="@string/clear_speaker_title"
+            android:summary="@string/clear_speaker_summary"
+            android:icon="@drawable/ic_clear_speaker" />
     </PreferenceCategory>
 
     <!-- Battery -->

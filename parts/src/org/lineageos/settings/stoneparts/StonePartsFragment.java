@@ -29,6 +29,10 @@ public class StonePartsFragment extends PreferenceFragment {
     private static final String KEY_ZRAM = "zram";
     private static final String KEY_KERNEL_MANAGER = "kernel_manager";
     private static final String KEY_GPU_MANAGER = "gpu_manager";
+    private static final String KEY_THERMAL = "thermal";
+    private static final String KEY_HBM = "hbm";
+    private static final String KEY_DC_DIMMING = "dc_dimming";
+    private static final String KEY_CLEAR_SPEAKER = "clear_speaker";
 
     private static final java.util.Map<String, String> TARGETS;
     static {
@@ -38,6 +42,10 @@ public class StonePartsFragment extends PreferenceFragment {
         map.put(KEY_ZRAM, "org.lineageos.settings.zram.ZramActivity");
         map.put(KEY_KERNEL_MANAGER, "org.lineageos.settings.kernelmanager.KernelManagerActivity");
         map.put(KEY_GPU_MANAGER, "org.lineageos.settings.gpumanager.GpuManagerActivity");
+        map.put(KEY_THERMAL, "org.lineageos.settings.thermal.ThermalActivity");
+        map.put(KEY_HBM, "org.lineageos.settings.hbm.HBMActivity");
+        map.put(KEY_DC_DIMMING, "org.lineageos.settings.display.DcDimmingSettingsActivity");
+        map.put(KEY_CLEAR_SPEAKER, "org.lineageos.settings.speaker.ClearSpeakerActivity");
         TARGETS = java.util.Collections.unmodifiableMap(map);
     }
 
