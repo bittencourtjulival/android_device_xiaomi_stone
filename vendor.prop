@@ -278,6 +278,10 @@ persist.vendor.ssr.enable_ramdumps=0
 persist.vendor.qcomsysd.enabled=false
 persist.vendor.perf.enable_logger=false
 
+# ScrollOptimizer
+persist.sys.perf.scroll_opt=true
+persist.sys.perf.scroll_opt.heavy_app=1
+
 # Sensors
 persist.vendor.sensors.enable.bypass_worker=true
 persist.vendor.sensors.enable.mag_filter=true
