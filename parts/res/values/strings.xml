@@ -173,6 +173,11 @@ limitations under the License.
     <string name="gpu_advanced_category">Advanced Settings</string>
     <string name="gpu_info_summary">Manage GPU frequency scaling and power settings. Changes may affect performance and battery life.</string>
 
+    <!-- Battery Status module -->
+    <string name="battery_status_title">Battery Status</string>
+    <string name="battery_notification_label">Show battery status in notifications</string>
+    <string name="battery_status_summary">Displays detailed battery information and persistent notification</string>
+
     <!-- Categories -->
     <string name="category_cpu_title">CPU</string>
     <string name="category_gpu_title">GPU</string>
@@ -182,3 +187,5 @@ limitations under the License.
     <string name="category_audio_title">Audio</string>
 
 </resources>
+
+

@@ -21,7 +21,7 @@ limitations under the License.
           android:versionName="1.0"
           android:sharedUserId="android.uid.system">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -29,22 +29,18 @@ limitations under the License.
 
     <uses-sdk
         android:minSdkVersion="24"
-        android:targetSdkVersion="30"/>
+        android:targetSdkVersion="30" />
 
     <application
+        android:name=".batterystatus.AppContextProvider"
         android:label="@string/device_settings_app_name"
         android:persistent="true"
         android:defaultToDeviceProtectedStorage="true"
         android:directBootAware="true"
-        android:theme="@style/Theme.SubSettingsBase">
+        android:theme="@style/Theme.SubSettingsBase"
+        android:supportsRtl="true">
 
-        <receiver android:name=".BootCompletedReceiver">
-            <intent-filter android:priority="1000">
-                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-
+        <!-- Stone Parts main -->
         <activity
             android:name=".stoneparts.StonePartsActivity"
             android:label="@string/stone_parts_title"
@@ -68,90 +64,121 @@ limitations under the License.
                 android:value="150" />
             </activity>
 
-        <!-- Internal activities, no IA_SETTINGS -->
+            <!-- Internal activities, no IA_SETTINGS -->
+            <activity android:name=".doze.DozeSettingsActivity"
+                      android:label="@string/ambient_display_title" />
+
+            <activity android:name=".zram.ZramActivity"
+                      android:label="@string/zram_size_title"
+                      android:exported="false" />
+
+            <activity android:name=".fastcharge.FastChargeActivity"
+                      android:label="@string/fastcharge_title"
+                      android:exported="false" />
+
+            <activity android:name=".corecontrol.CoreControlActivity"
+                      android:label="@string/core_control_title"
+                      android:exported="false" />
+
+            <activity android:name=".kernelmanager.KernelManagerActivity"
+                      android:label="@string/kernel_manager_title"
+                      android:exported="false" />
+
+            <activity android:name=".gpumanager.GpuManagerActivity"
+                      android:label="@string/gpu_manager_title"
+                      android:exported="false" />
+
+            <activity android:name=".thermal.ThermalActivity"
+                      android:label="@string/thermal_title"
+                      android:exported="false" />
+
+            <activity android:name=".speaker.ClearSpeakerActivity"
+                      android:label="@string/clear_speaker_title"
+                      android:exported="false" />
+
+            <activity android:name=".display.DcDimmingSettingsActivity"
+                      android:label="@string/dc_dimming_enable_title"
+                      android:theme="@style/Theme.SubSettingsBase"
+                      android:exported="false" />
+
+            <activity android:name=".hbm.HBMActivity"
+                      android:label="@string/hbm_fragment_title"
+                      android:theme="@style/Theme.SubSettingsBase"
+                      android:exported="false" />
+
             <activity
-                android:name=".doze.DozeSettingsActivity"
-                android:label="@string/ambient_display_title">
-            </activity>
-
-             <activity
-                 android:name=".zram.ZramActivity"
-                 android:label="@string/zram_size_title"
-                 android:exported="false" />
-
-             <activity
-                 android:name=".fastcharge.FastChargeActivity"
-                 android:label="@string/fastcharge_title"
-                 android:exported="false" />
-
-             <activity
-                 android:name=".corecontrol.CoreControlActivity"
-                 android:label="@string/core_control_title"
-                 android:exported="false" />
-
-             <activity
-                 android:name=".kernelmanager.KernelManagerActivity"
-                 android:label="@string/kernel_manager_title"
-                 android:exported="false" />
-
-             <activity
-                 android:name=".gpumanager.GpuManagerActivity"
-                 android:label="@string/gpu_manager_title"
-                 android:exported="false" />
-
-            <activity
-                android:name=".thermal.ThermalActivity"
-                android:label="@string/thermal_title"
-                android:exported="false" />
-
-            <activity
-                android:name=".speaker.ClearSpeakerActivity"
-                android:label="@string/clear_speaker_title"
-                android:exported="false" />
-
-            <activity
-                android:name=".display.DcDimmingSettingsActivity"
-                android:label="@string/dc_dimming_enable_title"
+                android:name=".batterystatus.BatteryStatusActivity"
+                android:label="@string/battery_status_title"
                 android:theme="@style/Theme.SubSettingsBase"
                 android:exported="false" />
 
-            <activity
-                android:name=".hbm.HBMActivity"
-                android:label="@string/hbm_fragment_title"
-                android:theme="@style/Theme.SubSettingsBase"
-                android:exported="false" />
+            <activity-alias
+                android:name=".batterystatus.BatteryStatusSettingsActivity"
+                android:targetActivity=".batterystatus.BatteryStatusActivity"
+                android:enabled="true"
+                android:exported="false"
+                android:label="@string/battery_status_title" />
 
-        <!-- Tile Services -->
-        <service android:name=".thermal.ThermalTileService"
-            android:icon="@drawable/ic_thermal"
-            android:label="@string/thermal_title"
-            android:exported="true"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
-            </intent-filter>
+            <!-- Services -->
+            <service
+                android:name=".batterystatus.BatteryNotificationService"
+                android:exported="false"
+                android:foregroundServiceType="connectedDevice|dataSync|location|mediaProjection|phoneCall|systemExempted" />
+
+            <!-- Boot Receivers -->
+            <receiver
+                android:name=".BootCompletedReceiver"
+                android:enabled="true"
+                android:exported="true">
+                <intent-filter android:priority="1000">
+                    <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                    <action android:name="android.intent.action.BOOT_COMPLETED" />
+                </intent-filter>
+            </receiver>
+
+            <receiver
+                android:name=".batterystatus.BootReceiver"
+                android:enabled="true"
+                android:exported="true">
+                <intent-filter>
+                    <action android:name="android.intent.action.BOOT_COMPLETED" />
+                </intent-filter>
+            </receiver>
+
+            <!-- Tile Services -->
+            <service android:name=".thermal.ThermalTileService"
+                     android:icon="@drawable/ic_thermal"
+                     android:label="@string/thermal_title"
+                     android:exported="true"
+                     android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+                <intent-filter>
+                    <action android:name="android.service.quicksettings.action.QS_TILE" />
+                </intent-filter>
+            </service>
+
+            <service android:name=".display.DcDimmingTileService"
+                     android:icon="@drawable/ic_dc_dimming"
+                     android:label="@string/dc_dimming_enable_title"
+                     android:exported="true"
+                     android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+                <intent-filter>
+                    <action android:name="android.service.quicksettings.action.QS_TILE" />
+                </intent-filter>
+            </service>
+
+            <service android:name=".hbm.HBMModeTileService"
+                     android:icon="@drawable/ic_hbm"
+                     android:label="@string/hbm_fragment_title"
+                     android:exported="true"
+                     android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+                <intent-filter>
+                    <action android:name="android.service.quicksettings.action.QS_TILE" />
+                </intent-filter>
         </service>
-        <service android:name=".display.DcDimmingTileService"
-            android:icon="@drawable/ic_dc_dimming"
-            android:label="@string/dc_dimming_enable_title"
-            android:exported="true"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
-            </intent-filter>
-        </service>
-        <service android:name=".hbm.HBMModeTileService"
-            android:icon="@drawable/ic_hbm"
-            android:label="@string/hbm_fragment_title"
-            android:exported="true"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
-            </intent-filter>
-        </service>
+
         <service
-            android:name=".doze.DozeService"
-            android:permission="XiaomiDozeService">
-        </service>
+                android:name=".doze.DozeService"
+                android:permission="XiaomiDozeService" />
+
     </application>
 </manifest>

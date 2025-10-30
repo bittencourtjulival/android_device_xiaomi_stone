@@ -33,6 +33,7 @@ public class StonePartsFragment extends PreferenceFragment {
     private static final String KEY_HBM = "hbm";
     private static final String KEY_DC_DIMMING = "dc_dimming";
     private static final String KEY_CLEAR_SPEAKER = "clear_speaker";
+    private static final String KEY_BATTERY_STATUS = "battery_status";
 
     private static final java.util.Map<String, String> TARGETS;
     static {
@@ -46,6 +47,7 @@ public class StonePartsFragment extends PreferenceFragment {
         map.put(KEY_HBM, "org.lineageos.settings.hbm.HBMActivity");
         map.put(KEY_DC_DIMMING, "org.lineageos.settings.display.DcDimmingSettingsActivity");
         map.put(KEY_CLEAR_SPEAKER, "org.lineageos.settings.speaker.ClearSpeakerActivity");
+        map.put(KEY_BATTERY_STATUS, "org.lineageos.settings.batterystatus.BatteryStatusActivity");
         TARGETS = java.util.Collections.unmodifiableMap(map);
     }
 
