@@ -36,7 +36,11 @@ PRODUCT_NAME := lineage_stone
 
 # GMS
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
-TARGET_DEFAULT_PIXEL_LAUNCHER := true
+TARGET_DEFAULT_PIXEL_LAUNCHER = false
+
+PRODUCT_SYSTEM_PROPERTIES += \
+    persist.sys.default_launcher=0 \
+    persist.sys.quickswitch_pixel_shipped=1
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BuildDesc="sunstone_global-user 14 UKQ1.240624.001 OS2.0.1.0.UMQMIXM release-keys" \
