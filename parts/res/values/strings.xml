@@ -95,10 +95,10 @@ limitations under the License.
     <string name="zram_size_summary">Configure ZRAM swap size</string>
     <string name="zram_disabled">Disabled</string>
     <string name="zram_size_dynamic">Dynamic (default)</string>
-    <string name="zram_size_2gb">2GB</string>
-    <string name="zram_size_4gb">4GB</string>
-    <string name="zram_size_8gb">8GB</string>
-    <string name="zram_summary">Choose which ZRAM settings to apply</string>
+    <string name="zram_size_quarter">%s GB (1/4 of RAM)</string>
+    <string name="zram_size_half">%s GB (1/2 of RAM)</string>
+    <string name="zram_size_full">%s GB (1/1 of RAM)</string>
+    <string name="zram_summary">Choose which ZRAM size you want to apply</string>
     <string name="zram_change_applied">ZRAM setting saved (will apply after reboot)</string>
     <string name="zram_reboot_recommended">For changes to take effect, please reboot your device</string>
     <string name="zram_compression_title">Compression algorithm</string>

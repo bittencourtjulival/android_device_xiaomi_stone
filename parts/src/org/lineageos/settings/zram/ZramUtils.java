@@ -14,22 +14,6 @@
  * limitations under the License.
  */
 
-/*
- * Copyright (C) 2025 The LineageOS Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package org.lineageos.settings.zram;
 
 import android.content.Context;
@@ -70,7 +54,7 @@ public class ZramUtils {
                 Log.e(TAG, "Invalid ZRAM size in property: " + propValue);
             }
         }
-        
+
         // Fall back to SharedPreferences
         try {
             return Integer.parseInt(mSharedPrefs.getString(PREF_ZRAM_SIZE, "-1"));
@@ -80,23 +64,27 @@ public class ZramUtils {
     }
 
     public void setZramSize(int size) {
-        // Validate input
-        if (size != 0 && size != 2 && size != 4 && size != 8 && size != -1) {
+        // Validate input - new percentage-based values
+        if (size != 0 && size != 25 && size != 50 && size != 100 && size != -1) {
             Log.w(TAG, "Invalid ZRAM size: " + size);
             return;
         }
+
+        Log.d(TAG, "Setting ZRAM size to: " + size);
 
         // Store in SharedPreferences as String
         mSharedPrefs.edit()
                 .putString(PREF_ZRAM_SIZE, String.valueOf(size))
                 .apply();
-        
+
         // Set system property
         SystemProperties.set(ZRAM_PROP, String.valueOf(size));
-        
+
+        Log.d(TAG, "ZRAM property set. Verify with: getprop " + ZRAM_PROP);
+
         Toast.makeText(mContext, R.string.zram_change_applied, Toast.LENGTH_SHORT).show();
     }
-    
+
     public String getCurrentCompression() {
         String propValue = SystemProperties.get(ZRAM_COMP_PROP, "lz4");
         if (!propValue.isEmpty()) {
@@ -115,7 +103,7 @@ public class ZramUtils {
     }
 
     public void setCompressionAlgorithm(String algorithm) {
-        if (!algorithm.equals("lz4") && !algorithm.equals("lzo") && 
+        if (!algorithm.equals("lz4") && !algorithm.equals("lzo") &&
             !algorithm.equals("lzo-rle") && !algorithm.equals("zstd")) {
             Log.w(TAG, "Invalid compression algorithm: " + algorithm);
             return;
@@ -124,7 +112,7 @@ public class ZramUtils {
         mSharedPrefs.edit()
                 .putString(PREF_ZRAM_COMP, algorithm)
                 .apply();
-    
+
         SystemProperties.set(ZRAM_COMP_PROP, algorithm);
     }
 
@@ -135,13 +123,13 @@ public class ZramUtils {
         }
 
         // Store in SharedPreferences
-       mSharedPrefs.edit()
+        mSharedPrefs.edit()
                 .putInt(PREF_SWAPPINESS, value)
                 .apply();
-    
+
         // Set system property
         SystemProperties.set(SWAPPINESS_PROP, String.valueOf(value));
-    
+
         // Apply immediately
         try {
             FileWriter writer = new FileWriter("/proc/sys/vm/swappiness");
@@ -150,7 +138,7 @@ public class ZramUtils {
         } catch (IOException e) {
             Log.e(TAG, "Failed to write to swappiness", e);
         }
-    
+
         Toast.makeText(mContext, R.string.zram_change_applied, Toast.LENGTH_SHORT).show();
     }
 
