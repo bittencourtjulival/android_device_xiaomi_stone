@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2021 The LineageOS Project
  *
@@ -10,7 +11,7 @@
 #include "vendor_init.h"
 
 void vendor_load_properties() {
-    
+
     const std::vector<variant_info_t> variants = {
         { //MOONSTONE_GLOBAL
             "moonstone_p_global",
@@ -42,7 +43,7 @@ void vendor_load_properties() {
             "sunstone",
             "Redmi Note 12 5G",
             "_blair_lite",
-            "Redmi/sunstone_global/sunstone:14/UKQ1.240624.001/OS2.0.1.0.UMQMIXM:user/release-keys"
+            "Redmi/sunstone_global/sunstone:14/UKQ1.240624.001/OS2.0.5.0.UMQMIXM:user/release-keys"
         },
         { //SUNSTONE_IN
             "sunstone_in",
@@ -61,7 +62,7 @@ void vendor_load_properties() {
             "Redmi/sunstone/sunstone:14/UKQ1.230917.001/V816.0.2.0.UMQCNXM:user/release-keys"
         }
     };
-    
+
     search_variant(variants);
     set_dalvik_heap();
 }
