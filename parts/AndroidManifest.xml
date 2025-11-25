@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+<<<<<<< HEAD
 Copyright (C) 2015-2016 The CyanogenMod Project
 2017-2018 The LineageOS Project
+=======
+     Copyright (C) 2015-2016 The CyanogenMod Project
+                   2017-2025 The LineageOS Project
+>>>>>>> e20570d8 (sm8350-common: parts: Apply Expressive theme)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -37,14 +42,14 @@ limitations under the License.
         android:persistent="true"
         android:defaultToDeviceProtectedStorage="true"
         android:directBootAware="true"
-        android:theme="@style/Theme.SubSettingsBase"
+        android:theme="@style/Theme.SubSettingsBase.Expressive"
         android:supportsRtl="true">
 
         <!-- Stone Parts main -->
         <activity
             android:name=".stoneparts.StonePartsActivity"
             android:label="@string/stone_parts_title"
-            android:theme="@style/Theme.SubSettingsBase"
+            android:theme="@style/Theme.SubSettingsBase.Expressive"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.android.settings.action.IA_SETTINGS" />
@@ -98,18 +103,18 @@ limitations under the License.
 
             <activity android:name=".display.DcDimmingSettingsActivity"
                       android:label="@string/dc_dimming_enable_title"
-                      android:theme="@style/Theme.SubSettingsBase"
+                      android:theme="@style/Theme.SubSettingsBase.Expressive"
                       android:exported="false" />
 
             <activity android:name=".hbm.HBMActivity"
                       android:label="@string/hbm_fragment_title"
-                      android:theme="@style/Theme.SubSettingsBase"
+                      android:theme="@style/Theme.SubSettingsBase.Expressive"
                       android:exported="false" />
 
             <activity
                 android:name=".batterystatus.BatteryStatusActivity"
                 android:label="@string/battery_status_title"
-                android:theme="@style/Theme.SubSettingsBase"
+                android:theme="@style/Theme.SubSettingsBase.Expressive"
                 android:exported="false" />
 
             <activity-alias
