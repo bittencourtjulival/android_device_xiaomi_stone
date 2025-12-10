@@ -39,4 +39,11 @@
 
     <!-- Sets AOD/Ambient Display brightness to 15% (from 0 to 255, 20% ≈ 50) -->
     <integer name="config_screenBrightnessDoze">38</integer>
+
+    <!-- Needed for custom rom CPU temp paths -->
+    <string name="config_cpuTempSensor">/sys/class/thermal/thermal_zone28/temp</string>
+
+    <!-- The CPU temperature divider, if needed -->
+    <integer name="config_cpuTempDivider">1000</integer>
+
 </resources>
