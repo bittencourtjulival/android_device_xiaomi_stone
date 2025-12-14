@@ -1,6 +1,9 @@
 # Camera
 vendor.camera.sensor.               u:object_r:vendor_camera_sensor_prop:s0
 
+# Dynamic sensor
+vendor.dynamic_sensor.              u:object_r:vendor_dynamic_sensor_prop:s0
+
 # Fingerprint
 persist.vendor.fingerprint.         u:object_r:vendor_fp_prop:s0
 persist.vendor.sys.fp.              u:object_r:vendor_fp_prop:s0

@@ -7,3 +7,6 @@ allow hal_sensors_default hal_audio_hwservice:hwservice_manager find;
 
 allow hal_fingerprint_default system_prop:property_service { set };
 allow hal_fingerprint_default exported_system_prop:property_service { set };
+
+# Allow access for dynamic sensor properties
+get_prop(hal_sensors_default, vendor_dynamic_sensor_prop)
