@@ -1289,7 +1289,6 @@ vendor/etc/sensors/config/strait_power_0.json
 vendor/etc/sensors/config/strait_qrd_lsm6dst_0.json
 vendor/etc/sensors/config/strait_qrd_tmd2725.json
 vendor/etc/sensors/config/strait_tmd2725.json
-vendor/etc/sensors/hals.conf
 vendor/etc/sensors/sns_reg_config
 
 # Snapdragon Computer Vision Engine
