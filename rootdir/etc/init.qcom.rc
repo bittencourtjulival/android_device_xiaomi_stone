@@ -428,6 +428,7 @@ on property:sys.boot_completed=1
     chown system system /dev/cpuctl/foreground/cpu.uclamp.min
     chown system system /dev/cpuctl/top-app/cpu.uclamp.min
     chown system system /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
+    chown system system /dev/cpu_dma_latency
     chmod 0664 /proc/sys/kernel/sched_prefer_spread
     chmod 0664 /proc/sys/kernel/sched_busy_hyst_ns
     chmod 0664 /proc/sys/kernel/sched_busy_hysteresis_enable_cpus
@@ -436,6 +437,7 @@ on property:sys.boot_completed=1
     chmod 0664 /dev/cpuctl/foreground/cpu.uclamp.min
     chmod 0664 /dev/cpuctl/top-app/cpu.uclamp.min
     chmod 0664 /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
+    chmod 0664 /dev/cpu_dma_latency
 
 # corefile limit
 on property:persist.debug.trace=1
