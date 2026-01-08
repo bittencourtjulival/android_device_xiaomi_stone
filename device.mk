@@ -280,7 +280,7 @@ PRODUCT_PACKAGES += \
     SettingsOverlayStone \
     SettingsProviderOverlayStone \
     SystemUIOverlayStone \
-    WifiOverlayStone \ 
+    WifiOverlayStone \
     FrameworkOverlayMoonstone \
     FrameworkOverlaySunstone
 
