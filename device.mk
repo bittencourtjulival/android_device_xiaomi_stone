@@ -284,6 +284,7 @@ PRODUCT_PACKAGES += \
     CarrierConfigOverlayStone \
     DialerOverlayStone \
     TelephonyOverlayStone \
+    LauncherOverlayStone \
     FrameworkOverlayStone \
     SettingsOverlayStone \
     SettingsProviderOverlayStone \
