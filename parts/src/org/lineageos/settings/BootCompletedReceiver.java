@@ -34,18 +34,25 @@ import org.lineageos.settings.doze.DozeUtils;
 import org.lineageos.settings.thermal.ThermalUtils;
 import org.lineageos.settings.refreshrate.RefreshUtils;
 import org.lineageos.settings.utils.FileUtils;
+import org.lineageos.settings.batterystatus.BatteryNotificationService;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
     private static final boolean DEBUG = false;
     private static final String TAG = "XiaomiParts";
     private static final String DC_DIMMING_ENABLE_KEY = "dc_dimming_enable";
     private static final String DC_DIMMING_NODE = "/sys/devices/platform/soc/soc:qcom,dsi-display-primary/dimlayer_exposure";
+    
+    // Battery Status constants
+    private static final String BATTERY_STATUS_PREFS = "BatteryStatusPrefs";
+    private static final String KEY_NOTIFY_ENABLED = "notify_enabled";
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-    SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         if (DEBUG)
             Log.d(TAG, "Received boot completed intent");
+        
+        // Existing services
         DozeUtils.onBootCompleted(context);
         ThermalUtils.startService(context);
         RefreshUtils.startService(context);    
@@ -56,6 +63,9 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         FileUtils.writeLine(DC_DIMMING_NODE, dcDimmingEnabled ? "1" : "0");
         RefreshUtils.startService(context);
         overrideHdrTypes(context);
+        
+        // Battery Status Service
+        startBatteryStatusService(context);
     }
 
     private static void overrideHdrTypes(Context context) {
@@ -63,5 +73,17 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         final DisplayManager dm = context.getSystemService(DisplayManager.class);
         dm.overrideHdrTypes(Display.DEFAULT_DISPLAY, new int[]{
                 HdrCapabilities.HDR_TYPE_HDR10, HdrCapabilities.HDR_TYPE_HLG});
+    }
+    
+    private static void startBatteryStatusService(Context context) {
+        SharedPreferences batteryPrefs = context.getSharedPreferences(BATTERY_STATUS_PREFS, Context.MODE_PRIVATE);
+        boolean notifyEnabled = batteryPrefs.getBoolean(KEY_NOTIFY_ENABLED, false);
+        
+        if (notifyEnabled) {
+            if (DEBUG)
+                Log.d(TAG, "Starting BatteryNotificationService");
+            Intent serviceIntent = new Intent(context, BatteryNotificationService.class);
+            context.startForegroundService(serviceIntent);
+        }
     }
 }
