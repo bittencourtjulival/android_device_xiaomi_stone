@@ -43,7 +43,7 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
     protected boolean mContinuousUpdates = false;
 
     protected int mMinValue = 0;
-    protected int mMaxValue = 100;
+    protected int mMaxValue = 200;
     protected boolean mDefaultValueExists = false;
     protected int mDefaultValue;
     protected boolean mDefaultValueTextExists = false;

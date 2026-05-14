@@ -17,14 +17,14 @@
         android:summary="@string/zram_compression_summary"
         android:entries="@array/zram_compression_entries"
         android:entryValues="@array/zram_compression_values"
-        android:defaultValue="lz4" />
+        android:defaultValue="zstd" />
         
     <PreferenceCategory android:title="@string/advanced_settings">
         <org.lineageos.settings.zram.CustomSeekBarPreference
             android:key="swappiness"
             android:title="@string/swappiness_title"
             android:summary="@string/swappiness_summary"
-            android:defaultValue="60"
+            android:defaultValue="100"
             custom:interval="1"
             custom:showSign="false"
             custom:units="" />

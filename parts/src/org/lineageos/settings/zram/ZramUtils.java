@@ -86,15 +86,15 @@ public class ZramUtils {
     }
 
     public String getCurrentCompression() {
-        String propValue = SystemProperties.get(ZRAM_COMP_PROP, "lz4");
+        String propValue = SystemProperties.get(ZRAM_COMP_PROP, "zstd");
         if (!propValue.isEmpty()) {
             return propValue;
         }
-        return mSharedPrefs.getString(PREF_ZRAM_COMP, "lz4");
+        return mSharedPrefs.getString(PREF_ZRAM_COMP, "zstd");
     }
 
     public int getCurrentSwappiness() {
-        String propValue = SystemProperties.get(SWAPPINESS_PROP, "60");
+        String propValue = SystemProperties.get(SWAPPINESS_PROP, "100");
         try {
             return Integer.parseInt(propValue);
         } catch (NumberFormatException e) {
@@ -117,7 +117,7 @@ public class ZramUtils {
     }
 
     public void setSwappiness(int value) {
-        if (value < 0 || value > 100) {
+        if (value < 0 || value > 200) {
             Log.w(TAG, "Invalid swappiness value: " + value);
             return;
         }

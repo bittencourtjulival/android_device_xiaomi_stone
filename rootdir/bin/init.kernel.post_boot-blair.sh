@@ -37,7 +37,7 @@ function configure_zram_parameters() {
     local swappiness=$(getprop persist.vendor.vm.swappiness)
 
     # Set swappiness
-    echo ${swappiness:-60} > /proc/sys/vm/swappiness
+    echo ${swappiness:-100} > /proc/sys/vm/swappiness
 
     case "$zramSizeGB" in
         0)
@@ -73,7 +73,7 @@ function configure_zram_parameters() {
         if [ -n "$zramComp" ] && grep -q "$zramComp" /sys/block/zram0/comp_algorithm; then
             echo "$zramComp" > /sys/block/zram0/comp_algorithm
         else
-            echo "lz4" > /sys/block/zram0/comp_algorithm
+            echo "zstd" > /sys/block/zram0/comp_algorithm
         fi
 
         if [ -f /sys/block/zram0/use_dedup ]; then

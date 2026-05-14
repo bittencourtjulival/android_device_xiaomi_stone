@@ -104,7 +104,7 @@ limitations under the License.
     <string name="zram_compression_title">Compression algorithm</string>
     <string name="zram_compression_summary">Choose ZRAM compression algorithm</string>
     <string name="swappiness_title">Swappiness</string>
-    <string name="swappiness_summary">Adjust how aggressively the kernel swaps memory pages (default: 60)</string>
+    <string name="swappiness_summary">Adjust how aggressively the kernel swaps memory pages (default: 100)</string>
     <string name="swappiness_value">%1$d</string>
     <string name="zram_change_failed">Failed to apply ZRAM settings</string>
     <string name="advanced_settings">Advanced settings</string>
