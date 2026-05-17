@@ -17,9 +17,11 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.SwitchPreference;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
+import androidx.preference.TwoStatePreference;
 import org.lineageos.settings.R;
 
-public class GpuManagerFragment extends PreferenceFragment
+public class GpuManagerFragment extends SettingsBasePreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_GPU_GOVERNOR = "gpu_governor";

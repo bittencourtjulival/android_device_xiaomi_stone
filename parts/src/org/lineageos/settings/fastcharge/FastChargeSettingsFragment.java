@@ -20,13 +20,13 @@ import android.content.Context;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
 import androidx.preference.ListPreference;
 import androidx.preference.TwoStatePreference;
 
 import org.lineageos.settings.R;
 
-public class FastChargeSettingsFragment extends PreferenceFragment
+public class FastChargeSettingsFragment extends SettingsBasePreferenceFragment
     implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_NORMAL_CHARGER = "fastcharge_normal";

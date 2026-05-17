@@ -21,14 +21,14 @@ import android.content.Context;
 import android.os.Bundle;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
 import org.lineageos.settings.R;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Locale;
 
-public class ZramSettingsFragment extends PreferenceFragment
+public class ZramSettingsFragment extends SettingsBasePreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_ZRAM_SIZE = "zram_size";

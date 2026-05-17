@@ -14,10 +14,10 @@ import android.os.Bundle;
 import android.widget.Toast;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
 import org.lineageos.settings.R;
 
-public class KernelManagerFragment extends PreferenceFragment
+public class KernelManagerFragment extends SettingsBasePreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_CPU_GOVERNOR = "cpu_governor";

@@ -19,10 +19,10 @@ package org.lineageos.settings.stoneparts;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
 import org.lineageos.settings.R;
 
-public class StonePartsFragment extends PreferenceFragment {
+public class StonePartsFragment extends SettingsBasePreferenceFragment {
 
     private static final String KEY_CORE_CONTROL = "core_control";
     private static final String KEY_FAST_CHARGE = "fast_charge";

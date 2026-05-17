@@ -27,8 +27,8 @@ public class StonePartsActivity extends CollapsingToolbarBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getFragmentManager().findFragmentByTag(FRAGMENT_TAG) == null) {
-            getFragmentManager()
+        if (getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG) == null) {
+            getSupportFragmentManager()
                 .beginTransaction()
                 .replace(
                     com.android.settingslib.collapsingtoolbar.R.id.content_frame,
