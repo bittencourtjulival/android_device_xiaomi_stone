@@ -1,2 +1,5 @@
 type vendor_sysfs_fastcharge, fs_type, sysfs_type;
 type vendor_sysfs_corecontrol, fs_type, sysfs_type;
+
+# Power HAL
+type powerhal_vendor_data_file, file_type, data_file_type;
