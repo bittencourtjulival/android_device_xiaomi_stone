@@ -27,7 +27,7 @@ import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.MediaStore;
-import android.telecom.DefaultDialerManager;
+import android.telecom.TelecomManager;
 import android.view.Display;
 import android.view.Surface;
 import android.view.WindowManager;
@@ -193,6 +193,12 @@ public final class ThermalUtils {
         FileUtils.writeLine(THERMAL_SCONFIG, THERMAL_STATE_MAP.get(state));
     }
 
+    private String getDefaultDialerPackage() {
+        final TelecomManager tm = mContext.getSystemService(TelecomManager.class);
+        if (tm == null) return null;
+        return tm.getDefaultDialerPackage();
+    }
+
     private int getDefaultStateForPackage(String packageName) {
         switch (packageName) {
             case GMAPS_PACKAGE:
@@ -220,7 +226,7 @@ public final class ThermalUtils {
 
         if (AppUtils.isBrowserApp(mContext, packageName, UserHandle.myUserId())) {
             return STATE_BROWSER;
-        } else if (DefaultDialerManager.getDefaultDialerApplication(mContext).equals(packageName)) {
+        } else if (packageName.equals(getDefaultDialerPackage())) {
             return STATE_DIALER;
         } else if (isCameraApp(packageName)) {
             return STATE_CAMERA;
