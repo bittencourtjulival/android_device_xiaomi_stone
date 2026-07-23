@@ -248,18 +248,6 @@ persist.log.tag.AppOps=S
 # Incremental FS
 ro.incremental.enable=true
 
-# LMKD
-ro.lmk.use_psi=true
-ro.lmk.psi_partial_stall_ms=65
-ro.lmk.psi_complete_stall_ms=700
-ro.lmk.kill_heaviest_task=true
-ro.lmk.kill_timeout_ms=100
-ro.lmk.thrashing_limit=30
-ro.lmk.thrashing_limit_decay=10
-ro.lmk.swap_free_low_percentage=15
-ro.lmk.swap_util_max=85
-ro.lmk.filecache_min_kb=350000
-
 # Media
 debug.stagefright.c2inputsurface=-1
 vendor.netflix.bsp_rev=Q4350-32962-1

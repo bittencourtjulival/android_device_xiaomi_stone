@@ -142,9 +142,6 @@ tunnel.audio.encode=true
 #enable voice path for PCM VoIP by default
 use.voice.path.for.pcm.voip=true
 
-# Multi-Gen LRU
-persist.device_config.mglru_native.lru_gen_config=core_and_mm_walk
-
 #initialize QCA1530 detection
 sys.qca1530=detect
 
