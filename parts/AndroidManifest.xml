@@ -141,15 +141,6 @@ limitations under the License.
                 </intent-filter>
             </receiver>
 
-            <receiver
-                android:name=".batterystatus.BootReceiver"
-                android:enabled="true"
-                android:exported="true">
-                <intent-filter>
-                    <action android:name="android.intent.action.BOOT_COMPLETED" />
-                </intent-filter>
-            </receiver>
-
             <!-- Tile Services -->
             <service android:name=".thermal.ThermalTileService"
                      android:icon="@drawable/ic_thermal"

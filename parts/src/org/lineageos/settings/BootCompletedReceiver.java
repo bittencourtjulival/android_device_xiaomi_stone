@@ -44,7 +44,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     
     // Battery Status constants
     private static final String BATTERY_STATUS_PREFS = "BatteryStatusPrefs";
-    private static final String KEY_NOTIFY_ENABLED = "notify_enabled";
+    private static final String KEY_NOTIFY_ENABLED = "notifyEnabled";
 
     @Override
     public void onReceive(final Context context, Intent intent) {
