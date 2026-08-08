@@ -35,6 +35,8 @@ import android.os.SystemClock;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import java.util.Locale;
+
 public class BatteryNotificationService extends Service {
     private static final String CHANNEL_ID = "battery_status_channel";
     private static final int NOTIFICATION_ID = 1001;
@@ -52,6 +54,13 @@ public class BatteryNotificationService extends Service {
         prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         handler = new Handler();
+
+        BatteryManager bm = (BatteryManager) getSystemService(Context.BATTERY_SERVICE);
+        int initialLevel = bm != null ? bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY) : 100;
+        prefs.edit().putInt("lastBatteryLevel", initialLevel).apply();
+        prefs.edit().putLong("lastLevelUpdate", SystemClock.elapsedRealtime()).apply();
+        prefs.edit().putInt("mahDropScreenOn", 0).apply();
+        prefs.edit().putInt("mahDropScreenOff", 0).apply();
 
         registerReceiver(receiver, createIntentFilter());
         createNotificationChannel();
@@ -81,6 +90,7 @@ public class BatteryNotificationService extends Service {
         @Override
         public void run() {
             updateDurations();
+            sampleBatteryLevel();
             updateNotification();
             handler.postDelayed(this, UPDATE_INTERVAL_MS);
         }
@@ -108,7 +118,11 @@ public class BatteryNotificationService extends Service {
                 prefs.edit().putBoolean("isScreenOn", false).apply();
             } else if (Intent.ACTION_POWER_CONNECTED.equals(a) || Intent.ACTION_POWER_DISCONNECTED.equals(a)) {
                 resetDurations();
-
+                prefs.edit().putInt("mahDropScreenOn", 0).apply();
+                prefs.edit().putInt("mahDropScreenOff", 0).apply();
+                BatteryManager bm = (BatteryManager) getSystemService(Context.BATTERY_SERVICE);
+                int currentLevel = bm != null ? bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY) : 100;
+                prefs.edit().putInt("lastBatteryLevel", currentLevel).apply();
                 lastUpdateTime = SystemClock.elapsedRealtime();
             } else if (Intent.ACTION_BATTERY_CHANGED.equals(a)) {
                 int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
@@ -153,7 +167,6 @@ public class BatteryNotificationService extends Service {
         if (isScreenOn) {
             screenOnDuration += delta;
         } else {
-            // screen is off: decide if deep sleep (doze) or awake-with-screen-off
             if (isDeviceIdle) {
                 deepSleepDuration += delta;
             } else {
@@ -169,6 +182,42 @@ public class BatteryNotificationService extends Service {
         e.putLong("deepSleepDuration", deepSleepDuration);
         e.putLong("screenOffDuration", screenOffDuration);
         e.apply();
+    }
+
+    private void sampleBatteryLevel() {
+        boolean charging = prefs.getBoolean("isCharging", false);
+        
+        BatteryManager bm = (BatteryManager) getSystemService(Context.BATTERY_SERVICE);
+        if (bm == null) return;
+        int currentLevel = bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+        if (currentLevel < 0) return;
+
+        int lastLevel = prefs.getInt("lastBatteryLevel", currentLevel);
+
+        if (charging || currentLevel >= lastLevel) {
+            prefs.edit().putInt("lastBatteryLevel", currentLevel).apply();
+            return;
+        }
+
+        int levelDropped = lastLevel - currentLevel;
+        
+        long onTime = prefs.getLong("screenOnDuration", 0);
+        long offTime = prefs.getLong("screenOffDuration", 0);
+        long totalTime = onTime + offTime;
+        
+        if (totalTime > 0 && levelDropped > 0) {
+            float onRatio = (float) onTime / totalTime;
+            int onDrop = Math.round(levelDropped * onRatio);
+            int offDrop = levelDropped - onDrop;
+            
+            int currentOn = prefs.getInt("mahDropScreenOn", 0);
+            int currentOff = prefs.getInt("mahDropScreenOff", 0);
+            
+            prefs.edit().putInt("mahDropScreenOn", currentOn + onDrop).apply();
+            prefs.edit().putInt("mahDropScreenOff", currentOff + offDrop).apply();
+        }
+
+        prefs.edit().putInt("lastBatteryLevel", currentLevel).apply();
     }
 
     private void updateNotification() {
@@ -224,8 +273,6 @@ public class BatteryNotificationService extends Service {
                     if (voltageMv <= 0) {
                         voltageMv = batt.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1);
                     }
-                    if (currentMilliA == 0f) {
-                    }
                     if (level < 0) {
                         level = batt.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
                     }
@@ -258,24 +305,48 @@ public class BatteryNotificationService extends Service {
                 statusStr = "Unknown";
         }
 
-        float voltageV = (voltageMv > 0) ? (voltageMv / 1000f) : 0f; // mV -> V
-        float currentA = currentMilliA / 1000f; // mA -> A
+        float voltageV = (voltageMv > 0) ? (voltageMv / 1000f) : 0f;
+        float currentA = currentMilliA / 1000f;
         float powerW = 0f;
         if (voltageV > 0f && currentA > 0f) {
             powerW = voltageV * currentA;
         }
 
-        String line1 = String.format("🔋 Power: %.2f W | %.0f mA   🌡️ %.1f °C", powerW, currentMilliA, tempC);
-        String line2 = "📱 Screen on: " + formatDuration(onDur);
-        String line3 = "🌙 Screen off: " + formatDuration(offDur);
-        String line4 = "⚡ Awake: " + formatDuration(awakeDur);
-        String line5 = "💤 DeepSleep: " + formatDuration(deepDur);
+        int dropOnPct = prefs.getInt("mahDropScreenOn", 0);
+        int dropOffPct = prefs.getInt("mahDropScreenOff", 0);
+        
+        double nominalCapacity = BatteryInfoUtils.getBatteryCapacityNominal();
+        int dropOnMah = (int) ((dropOnPct * nominalCapacity) / 100.0);
+        int dropOffMah = (int) ((dropOffPct * nominalCapacity) / 100.0);
+        
+        float activeRate = 0f;
+        float idleRate = 0f;
+        if (onDur >= 60000L && dropOnPct > 0) {
+            activeRate = (float) (dropOnPct / (onDur / 3600000.0));
+        }
+        if (offDur >= 60000L && dropOffPct > 0) {
+            idleRate = (float) (dropOffPct / (offDur / 3600000.0));
+        }
+
+        float awakePct = 0f;
+        float deepPct = 0f;
+        if (offDur > 0) {
+            awakePct = (awakeDur * 100.0f) / offDur;
+            deepPct = (deepDur * 100.0f) / offDur;
+        }
+
+        String line1 = String.format("🔋Power: %.2fW | %.0fmA   🌡️ %.1f°C", powerW, currentMilliA, tempC);
+        String line2 = String.format("📉Active: %.1f%%/h   Idle: %.1f%%/h", activeRate, idleRate);
+        String line3 = String.format("📱ScreenOn: %s • %.1f%%(%dmAh)", formatDurationCompact(onDur), (float) dropOnPct, dropOnMah);
+        String line4 = String.format("🌙ScreenOff: %s • %.1f%%(%dmAh)", formatDurationCompact(offDur), (float) dropOffPct, dropOffMah);
+        String line5 = String.format("⚡Awake: %s • (%.1f%%)", formatDurationCompact(awakeDur), awakePct);
+        String line6 = String.format("💤DeepSleep: %s • (%.1f%%)", formatDurationCompact(deepDur), deepPct);
 
         NotificationCompat.Builder nb = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle(level >= 0 ? ("Battery: " + level + "% (" + statusStr + ")") : "Battery Status")
                 .setContentText(line1)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(
-                        line1 + "\n" + line2 + "\n" + line3 + "\n" + line4 + "\n" + line5))
+                        line1 + "\n" + line2 + "\n" + line3 + "\n" + line4 + "\n" + line5 + "\n" + line6))
                 .setSmallIcon(android.R.drawable.ic_lock_idle_charging)
                 .setOngoing(true);
 
@@ -299,5 +370,14 @@ public class BatteryNotificationService extends Service {
         long m = (s % 3600) / 60;
         long sec = s % 60;
         return String.format("%02dh %02dm %02ds", h, m, sec);
+    }
+
+    private String formatDurationCompact(long ms) {
+        if (ms <= 0) return "00:00:00";
+        long s = ms / 1000;
+        long h = s / 3600;
+        long m = (s % 3600) / 60;
+        long sec = s % 60;
+        return String.format("%02d:%02d:%02d", h, m, sec);
     }
 }

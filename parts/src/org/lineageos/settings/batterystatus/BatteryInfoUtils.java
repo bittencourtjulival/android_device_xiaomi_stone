@@ -84,4 +84,17 @@ public class BatteryInfoUtils {
         long uptime = SystemClock.elapsedRealtime();
         return formatDuration(uptime);
     }
+
+    public static double getBatteryCapacityNominal() {
+        Context context = AppContextProvider.getContext();
+        if (context == null) return 4500.0;
+        try {
+            Object powerProfile = Class.forName("com.android.internal.os.PowerProfile")
+                    .getConstructor(Context.class).newInstance(context);
+            return (double) Class.forName("com.android.internal.os.PowerProfile")
+                    .getMethod("getBatteryCapacity").invoke(powerProfile);
+        } catch (Throwable e) {
+            return 4500.0;
+        }
+    }
 }
