@@ -62,6 +62,8 @@ PRODUCT_PACKAGES += \
     libqcomvoiceprocessing \
     libvolumelistener
 
+PRODUCT_PACKAGES += android.hardware.audio.sounddose-V1-ndk
+
 AUDIO_HAL_DIR := hardware/qcom-caf/sm8350/audio
 AUDIO_SKU_DIR := sku_holi
 
