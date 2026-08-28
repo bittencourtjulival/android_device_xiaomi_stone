@@ -13,10 +13,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 # Inherit some common Lineage stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+$(call inherit-product, vendor/custom/config/common_full_phone.mk)
 
-# rising Maintainer
-RISING_MAINTAINER := Julival Bittencourt
+# ASCP
+ASCP_MAINTAINER := Julival Bittencourt
+WITH_REVANCED := true
 
 # Blur
 TARGET_ENABLE_BLUR := true
@@ -32,22 +33,12 @@ PRODUCT_BRAND := Redmi
 PRODUCT_DEVICE := stone
 PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_MODEL := Redmi Note 12 5G
-PRODUCT_NAME := lineage_stone
-
-# Lawnchair
-TARGET_PREBUILT_LAWNCHAIR_LAUNCHER := true
+PRODUCT_NAME := stone
 
 # GMS
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
-TARGET_DEFAULT_PIXEL_LAUNCHER = false
-
-PRODUCT_SYSTEM_PROPERTIES += \
-    persist.sys.default_launcher=0 \
-    persist.sys.quickswitch_pixel_shipped=1
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BuildDesc="sunstone_global-user 14 UKQ1.240624.001 OS2.0.5.0.UMQMIXM release-keys" \
     BuildFingerprint=Redmi/sunstone_global/sunstone:14/UKQ1.240624.001/OS2.0.5.0.UMQMIXM:user/release-keys \
-    DeviceProduct=sunstone \
-    RisingChipset="Snapdragon 695/4 Gen1" \
-    RisingMaintainer="Julival Bittencourt"
+    DeviceProduct=sunstone
