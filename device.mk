@@ -233,7 +233,6 @@ PRODUCT_PACKAGES += \
       XiaomiParts
 
 # Kernel
-PRODUCT_ENABLE_UFFD_GC := true
 PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
 
 # Keymaster
@@ -414,7 +413,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     charger_fstab.qti \
     fstab.default
-  
+
 PRODUCT_PACKAGES += \
     init.class_main.sh \
     init.kernel.post_boot.sh \
@@ -535,4 +534,3 @@ TARGET_DISABLE_MATLOG := true
 
 # Inherit from proprietary targets
 $(call inherit-product, vendor/xiaomi/stone/stone-vendor.mk)
-
