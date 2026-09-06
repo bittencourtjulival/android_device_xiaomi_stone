@@ -19,6 +19,9 @@ $(call inherit-product-if-exists, hardware/dolby/dolby.mk)
 # ViPER4AndroidFX
 $(call inherit-product-if-exists, packages/apps/ViPER4AndroidFX/config.mk)
 
+# Graphene Camera
+$(call inherit-product-if-exists, vendor/graphene/camera/camera.mk)
+
 # A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch.mk)
 
