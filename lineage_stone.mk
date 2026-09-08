@@ -46,8 +46,8 @@ PRODUCT_SYSTEM_PROPERTIES += \
     persist.sys.quickswitch_pixel_shipped=1
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildDesc="sunstone_global-user 14 UKQ1.240624.001 OS2.0.5.0.UMQMIXM release-keys" \
-    BuildFingerprint=Redmi/sunstone_global/sunstone:14/UKQ1.240624.001/OS2.0.5.0.UMQMIXM:user/release-keys \
+    BuildDesc="sunstone_eea-user 14 UKQ1.240624.001 OS2.0.9.0.UMQEUXM release-keys" \
+    BuildFingerprint=Redmi/sunstone_eea/sunstone:14/UKQ1.240624.001/OS2.0.9.0.UMQEUXM:user/release-keys \
     DeviceProduct=sunstone \
     RisingChipset="Snapdragon 695/4 Gen1" \
     RisingMaintainer="Julival Bittencourt"
