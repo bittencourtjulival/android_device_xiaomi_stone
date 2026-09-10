@@ -200,6 +200,7 @@ persist.vendor.fingerprint.sensor_modules=fpc,goodix
 
 # Graphics
 debug.sf.auto_latch_unsignaled=0
+ro.sf.blurs_are_expensive=1
 debug.sf.disable_client_composition_cache=0
 debug.sf.enable_advanced_sf_phase_offset=1
 debug.sf.disable_backpressure=1
