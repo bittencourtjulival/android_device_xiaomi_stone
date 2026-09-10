@@ -218,6 +218,7 @@ persist.sys.sf.color_saturation=1.0
 persist.sys.sf.native_mode=0
 ro.hardware.egl=adreno
 ro.hardware.vulkan=adreno
+debug.renderengine.backend=skiaglthreaded
 vendor.gralloc.disable_ubwc=0
 vendor.gralloc.secure_preview_buffer_format=420_sp
 vendor.gralloc.secure_preview_only=1
