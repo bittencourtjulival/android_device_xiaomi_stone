@@ -24,8 +24,4 @@
     <!-- Default setting for Settings.Global.MOBILE_DATA_ALWAYS_ON -->
     <bool name="def_mobile_data_always_on">false</bool>
 
-    <!-- Speed up the animations -->
-    <fraction name="def_window_animation_scale">70%</fraction>
-    <fraction name="def_window_transition_scale">70%</fraction>
-    <fraction name="def_animator_duration_scale">70%</fraction>
 </resources>
