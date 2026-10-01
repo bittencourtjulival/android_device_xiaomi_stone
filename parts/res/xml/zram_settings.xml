@@ -17,7 +17,7 @@
         android:summary="@string/zram_compression_summary"
         android:entries="@array/zram_compression_entries"
         android:entryValues="@array/zram_compression_values"
-        android:defaultValue="zstd" />
+        android:defaultValue="lz4" />
         
     <PreferenceCategory android:title="@string/advanced_settings">
         <org.lineageos.settings.zram.CustomSeekBarPreference
